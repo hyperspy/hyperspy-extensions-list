@@ -4,7 +4,7 @@ HyperSpy extensions are packages that use the hyperspy extension mechanism to ad
 
 The following is a non-exhaustive list of HyperSpy extensions. If you would like to add your package here, just send us a pull request.
 
-| Project                                                                        | Brief description               |
+| Package name                                                                   | Brief description               |
 |--------------------------------------------------------------------------------|---------------------------------|
 | [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy |
 | [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy   |
