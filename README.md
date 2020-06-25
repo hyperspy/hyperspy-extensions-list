@@ -14,3 +14,5 @@ The following is a non-exhaustive list of HyperSpy extensions and the `signal_ty
 | [lumispy](https://github.com/LumiSpy/lumispy)                                  | Processing and analysis of luminescence spectroscopy data            | `Luminescence`, `CL`, `CL_SEM`, `CL_STEM`, `EL`, `PL`            |
 
 If you would like to add your package here, just send us a pull request.
+
+To learn how to create new HyperSpy extension, read the [hyperspy developer guide](https://hyperspy.readthedocs.io/en/latest/dev_guide/writing_extensions.html).
