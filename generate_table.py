@@ -1,13 +1,13 @@
-import yaml
-import hyperspy.api as hs
-from shutil import copyfile
+import os
 
-# html = print_html(hs.print_known_signal_types())
-copyfile("readme_base.md", "README.md")
+import hyperspy.api as hs
+
+
+readme_source_folder = 'readme_source'
 
 from hyperspy.ui_registry import ALL_EXTENSIONS
 from prettytable import PrettyTable
-from hyperspy.misc.utils import print_html
+
 table = PrettyTable()
 table.field_names = [
     "signal_type",
@@ -26,10 +26,13 @@ for sclass, sdict in ALL_EXTENSIONS["signals"].items():
     table.sortby = "class name"
 
 
-with open("README.md", "a") as file:
-    file.write(table.get_html_string())
+with open(os.path.join(readme_source_folder, '2-extension_table.md'), "w") as f:
+    f.write(table.get_html_string())
 
+source_file_list = os.listdir(readme_source_folder)
 
-
-# with open("README.md", "w") as readme:
-#     file.write(table.get_html_string())
+with open("README.md", "w") as readme_file:
+    for filename in source_file_list:
+        with open(os.path.join(readme_source_folder, filename), "r") as file:
+            readme_file.write(file.read())
+            readme_file.write('\n\n')

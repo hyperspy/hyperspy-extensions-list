@@ -5,8 +5,6 @@ HyperSpy extensions are packages that use the hyperspy extension mechanism to ad
 The following is a non-exhaustive list of HyperSpy extensions. If you would like to add your package here, just send us a pull request.
 
 
-
-
 <table>
     <tr>
         <th>signal_type</th>
@@ -171,3 +169,7 @@ The following is a non-exhaustive list of HyperSpy extensions. If you would like
         <td>kikuchipy</td>
     </tr>
 </table>
+
+# Some more readme
+
+
