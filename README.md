@@ -4,6 +4,15 @@ HyperSpy extensions are packages that use the hyperspy extension mechanism to ad
 
 The following is a non-exhaustive list of HyperSpy extensions. If you would like to add your package here, just send us a pull request.
 
+| Package name                                                                   | Brief description                                                    |
+|--------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                      |
+| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                        |
+| [KikuchiPy](https://github.com/kikuchipy/kikuchipy)                            | Processing and analysis of electron backscatter diffraction patterns |
+| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                             |
+
+## List of `signal_type`
+
 
 <table>
     <tr>
@@ -170,6 +179,6 @@ The following is a non-exhaustive list of HyperSpy extensions. If you would like
     </tr>
 </table>
 
-# Some more readme
+## Other information
 
 

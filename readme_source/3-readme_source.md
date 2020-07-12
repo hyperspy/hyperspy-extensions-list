@@ -1,1 +1,1 @@
-# Some more readme
+## Other information

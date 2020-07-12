@@ -5,9 +5,10 @@ extension they need. The user facing information are written in the README.md
 which is generated automatically.
 
 To add an extension:
-1. add the name of the extension (name on pypi) to ``extension_list.txt``
-2. create and activate the environment - see below
-3. run ``python make_README.py`` to update the README.md file.
+1. add the package name and a short description in `readme_source/1-readme_base.md`
+2. add the name of the extension (name on pypi) to ``extension_list.txt``
+3. create and activate the environment - see below
+4. run ``python make_README.py`` to update the README.md file.
 
 To collect the necessary information, it is necessary to install the librairies
 in a dedicated python environment and generate the README.md from this environment.
