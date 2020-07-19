@@ -25,6 +25,6 @@ in a dedicated python environment and generate the README.md from this environme
 
 ### Using conda
 
-1. run ``conda create - n ext_list_env python``
+1. run ``conda create -n ext_list_env python``
 2. run ``conda activate ext_list_env``
-3. run ``conda install -r extension_list.txt``
+3. run ``conda install --file extension_list.txt``
