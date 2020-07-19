@@ -1,8 +1,9 @@
 # Add an extension
 
 This repository maintain a list of hyperspy extensions to help users find the
-extension they need. The user facing information are written in the README.md
-which is generated automatically.
+extension they need. The user facing information are written in the README.md,
+which is generated automatically. The extension needs to be available on
+[pypi](https://pypi.org) and optionally [conda-forge](https://conda-forge.org/docs).
 
 To add an extension:
 1. add the package name and a short description in `readme_source/1-readme_base.md`
@@ -26,4 +27,4 @@ in a dedicated python environment and generate the README.md from this environme
 
 1. run ``conda create - n ext_list_env python``
 2. run ``conda activate ext_list_env``
-3. run ``conda install --file extension_list.txt``
+3. run ``conda install -r extension_list.txt``
