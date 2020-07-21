@@ -9,7 +9,8 @@ To add an extension:
 1. add the package name and a short description to the table in `readme_source/1-readme_base.md`
 2. add the name of the extension (name on pypi) to ``extension_list.txt``
 3. create and activate the environment - see below
-4. run ``python make_README.py`` to update the README.md file.
+4. run ``python make_README.py`` to update the README.md file
+5. Commit the changes and send a pull request to this repository.
 
 ## Setting up the environment
 
@@ -27,6 +28,5 @@ in a dedicated python environment and generate the ``README.md`` from it.
 
 ### Using conda
 
-1. run ``conda create -n ext_list_env python``
+1. run ``conda create -n ext_list_env python -c conda-forge  --file extension_list.txt``
 2. run ``conda activate ext_list_env``
-3. run ``conda install --file extension_list.txt``
