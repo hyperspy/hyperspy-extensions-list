@@ -1,12 +1,14 @@
 name: Release
 
 on:
+  schedule:
+    - cron:  '10 0 * * *'
   push:
     branches:
       - '*'
   pull_request:
     branches:
-      - master
+      - '*'
 
 jobs:
   integration_test:
