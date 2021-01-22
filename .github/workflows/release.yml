@@ -73,6 +73,7 @@ jobs:
           pytest --pyargs pyxem
 
       - name: Run Kikuchipy Test Suite
+        if: ${{ always() }}
         run: |
           pytest --pyargs kikuchipy
 
