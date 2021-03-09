@@ -1,0 +1,94 @@
+name: Integration tests
+
+on:
+  schedule:
+    - cron:  '10 0 * * *'
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  integration_test:
+    name: hs_${{ matrix.HYPERSPY_VERSION }}-ext_${{ matrix.EXTENSION_VERSION }}${{ matrix.LABEL }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        HYPERSPY_VERSION: ['release', 'RnP', 'RnM']
+        EXTENSION_VERSION: ['release', 'dev']
+        UPSTREAM_DEV: [false]
+        include:
+          # test against upstream dev
+          - UPSTREAM_DEV: true
+            LABEL: -upstream_dev
+            HYPERSPY_VERSION: 'RnM'
+            EXTENSION_VERSION: 'dev'
+            DEPENDENCIES: numpy scipy scikit-learn scikit-image
+    env:
+      MPLBACKEND: agg
+      DEPS: hyperspy-base pyxem kikuchipy
+      TEST_DEPS: pytest
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: conda-incubator/setup-miniconda@master
+        with:
+          miniforge-variant: Mambaforge
+          miniforge-version: latest
+
+      - name: Conda info
+        run: |
+          conda info
+          conda list
+
+      - name: Install extensions
+        run: |
+          mamba install ${{ env.DEPS }}
+
+      - name: Install Test dependencies
+        run: |
+          mamba install pytest
+
+      - name: Conda list
+        run: |
+          conda list
+
+      - name: Install HyperSpy RnP
+        if: contains(matrix.HYPERSPY_VERSION, 'RnP')
+        run: |
+          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_patch.zip
+
+      - name: Install HyperSpy RnM
+        if: contains(matrix.HYPERSPY_VERSION, 'RnM')
+        run: |
+          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_minor.zip       
+
+      - name: Install Extension Dev
+        if: contains(matrix.EXTENSION_VERSION, 'dev')
+        run: |
+          pip install https://github.com/pyxem/kikuchipy/archive/master.zip --no-deps
+          pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
+
+      - name: Install dependencies development version
+        if: ${{ matrix.UPSTREAM_DEV }}
+        run: |
+          pip install --upgrade --no-deps --pre \
+            -i https://pypi.anaconda.org/scipy-wheels-nightly/simple \
+            ${{ matrix.DEPENDENCIES }}
+
+      - name: Run Pyxem Test Suite
+        run: |
+          pytest --pyargs pyxem
+
+      - name: Run Kikuchipy Test Suite
+        if: ${{ always() }}
+        run: |
+          pytest --pyargs kikuchipy
+
