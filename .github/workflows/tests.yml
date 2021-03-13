@@ -41,7 +41,7 @@ jobs:
       MPLBACKEND: agg
       EXTENSION: pyxem kikuchipy
       # Remove pytest-mpl once hyperspy 1.6.2 is released
-      TEST_DEPS: pytest pytest-mpl
+      TEST_DEPS: pytest pytest-mpl pytest-xdist pytest-rerunfailures pytest-instafail
     defaults:
       run:
         shell: bash -l {0}
@@ -101,7 +101,7 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          python -m pytest --pyargs hyperspy
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
 
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
