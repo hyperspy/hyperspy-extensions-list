@@ -39,7 +39,7 @@ jobs:
 
     env:
       MPLBACKEND: agg
-      EXTENSION: pyxem kikuchipy
+      EXTENSION: kikuchipy lumispy pyxem
       # Remove pytest-mpl once hyperspy 1.6.2 is released
       TEST_DEPS: pytest pytest-mpl pytest-xdist pytest-rerunfailures pytest-instafail
     defaults:
@@ -96,6 +96,7 @@ jobs:
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
         run: |
+          pip install https://github.com/lumispy/lumispy/archive/master.zip --no-deps
           pip install https://github.com/pyxem/kikuchipy/archive/master.zip --no-deps
           pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
 
@@ -103,13 +104,17 @@ jobs:
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
 
-      - name: Run Pyxem Test Suite
-        if: ${{ always() }}
-        run: |
-          python -m pytest --pyargs pyxem
-
       - name: Run Kikuchipy Test Suite
         if: ${{ always() }}
         run: |
           python -m pytest --pyargs kikuchipy
 
+      - name: Run LumiSpy Test Suite
+        if: ${{ always() }}
+        run: |
+          python -m pytest --pyargs lumispy
+
+      - name: Run Pyxem Test Suite
+        if: ${{ always() }}
+        run: |
+          python -m pytest --pyargs pyxem

@@ -1,4 +1,4 @@
 hyperspy
 kikuchipy
+lumispy
 pyxem
-
