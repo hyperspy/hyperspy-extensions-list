@@ -1,6 +1,8 @@
 name: Integration tests
 
 on:
+  workflow_dispatch:
+    workflow: "*"
   schedule:
     - cron:  '10 0 * * *'
   push:
