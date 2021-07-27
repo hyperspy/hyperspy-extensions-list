@@ -30,13 +30,13 @@ jobs:
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: numpy scipy scikit-learn scikit-image
+            DEPENDENCIES: scipy scikit-learn scikit-image
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             LABEL: -dependencies_pre_release
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: matplotlib numba scipy numpy sympy h5py scikit-image
+            DEPENDENCIES: matplotlib numba scipy sympy h5py scikit-image
             USE_MAMBA: false
 
     env:
