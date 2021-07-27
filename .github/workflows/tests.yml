@@ -30,20 +30,19 @@ jobs:
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: numpy scipy scikit-learn scikit-image
+            DEPENDENCIES: scipy scikit-learn scikit-image
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             LABEL: -dependencies_pre_release
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: matplotlib numba scipy numpy sympy h5py scikit-image
+            DEPENDENCIES: matplotlib numba scipy sympy h5py scikit-image
             USE_MAMBA: false
 
     env:
       MPLBACKEND: agg
       EXTENSION: kikuchipy lumispy pyxem
-      # Remove pytest-mpl once hyperspy 1.6.2 is released
-      TEST_DEPS: pytest pytest-mpl pytest-xdist pytest-rerunfailures pytest-instafail
+      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail
     defaults:
       run:
         shell: bash -l {0}
@@ -55,6 +54,10 @@ jobs:
         with:
           miniforge-variant: Mambaforge
           miniforge-version: latest
+          # use base environment, so that when using pip, this is from the
+          # mambaforge distribution
+          auto-activate-base: true
+          activate-environment: ""
 
       - name: Conda info
         run: |
@@ -64,14 +67,14 @@ jobs:
       - name: Install dependencies development version
         if: ${{ matrix.DEPENDENCIES_DEV }}
         run: |
-          pip install --upgrade --no-deps --pre \
-            -i https://pypi.anaconda.org/scipy-wheels-nightly/simple \
+          pip install --pre --extra-index-url \
+            https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
 
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
         run: |
-          pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
+          pip install --pre ${{ matrix.DEPENDENCIES }}
 
       - name: Install extensions and Test dependencies
         run: |
