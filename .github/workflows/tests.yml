@@ -54,6 +54,10 @@ jobs:
         with:
           miniforge-variant: Mambaforge
           miniforge-version: latest
+          # use base environment, so that when using pip, this is from the
+          # mambaforge distribution
+          auto-activate-base: true
+          activate-environment: ""
 
       - name: Conda info
         run: |
