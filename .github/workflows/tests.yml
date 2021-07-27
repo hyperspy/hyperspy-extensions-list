@@ -64,14 +64,14 @@ jobs:
       - name: Install dependencies development version
         if: ${{ matrix.DEPENDENCIES_DEV }}
         run: |
-          pip install --upgrade --no-deps --pre \
-            -i https://pypi.anaconda.org/scipy-wheels-nightly/simple \
+          pip install --pre --extra-index-url \
+            https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
 
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
         run: |
-          pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
+          pip install --pre ${{ matrix.DEPENDENCIES }}
 
       - name: Install extensions and Test dependencies
         run: |
