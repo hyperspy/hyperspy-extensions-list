@@ -42,8 +42,7 @@ jobs:
     env:
       MPLBACKEND: agg
       EXTENSION: kikuchipy lumispy pyxem
-      # Remove pytest-mpl once hyperspy 1.6.2 is released
-      TEST_DEPS: pytest pytest-mpl pytest-xdist pytest-rerunfailures pytest-instafail
+      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail
     defaults:
       run:
         shell: bash -l {0}
