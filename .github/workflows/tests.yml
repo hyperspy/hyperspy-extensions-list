@@ -96,13 +96,13 @@ jobs:
       - name: Install HyperSpy RnM
         if: contains(matrix.HYPERSPY_VERSION, 'RnM')
         run: |
-          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_minor.zip       
+          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_minor.zip
 
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
         run: |
           pip install https://github.com/lumispy/lumispy/archive/master.zip --no-deps
-          pip install https://github.com/pyxem/kikuchipy/archive/master.zip --no-deps
+          pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps
           pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
 
       - name: Run HyperSpy Test Suite
