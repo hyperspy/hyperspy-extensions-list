@@ -50,20 +50,20 @@ and send us a pull request.
         </tr>
         <tr>
             <td>CL</td>
-            <td>CL, cathodoluminescence</td>
+            <td>CLSpectrum, cathodoluminescence</td>
             <td>CLSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>TRCL</td>
+            <td>TR cathodoluminescence, time-resolved cathodoluminescence</td>
+            <td>CLTransient</td>
             <td>lumispy</td>
         </tr>
         <tr>
             <td>correlation</td>
             <td></td>
             <td>Correlation2D</td>
-            <td>pyxem</td>
-        </tr>
-        <tr>
-            <td>crystallographic_map</td>
-            <td></td>
-            <td>CrystallographicMap</td>
             <td>pyxem</td>
         </tr>
         <tr>
@@ -164,7 +164,7 @@ and send us a pull request.
         </tr>
         <tr>
             <td>EL</td>
-            <td>EL, electroluminescence</td>
+            <td>ELSpectrum, electroluminescence</td>
             <td>ELSpectrum</td>
             <td>lumispy</td>
         </tr>
@@ -194,14 +194,20 @@ and send us a pull request.
         </tr>
         <tr>
             <td>Luminescence</td>
-            <td>TRLumi, TR luminescence</td>
+            <td>TRLumi, TR luminescence, time-resolved luminescence</td>
             <td>LumiTransient</td>
             <td>lumispy</td>
         </tr>
         <tr>
             <td>PL</td>
-            <td>PL, photoluminescence</td>
+            <td>PLSpectrum, photoluminescence</td>
             <td>PLSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>TRPL</td>
+            <td>TR photoluminescence, time-resolved photoluminescence</td>
+            <td>PLTransient</td>
             <td>lumispy</td>
         </tr>
         <tr>
@@ -235,12 +241,6 @@ and send us a pull request.
             <td>pyxem</td>
         </tr>
         <tr>
-            <td>vdf_image</td>
-            <td></td>
-            <td>VDFImage</td>
-            <td>pyxem</td>
-        </tr>
-        <tr>
             <td>vector_matching</td>
             <td></td>
             <td>VectorMatchingResults</td>
@@ -251,6 +251,12 @@ and send us a pull request.
             <td>virtual_backscatter_electron_image</td>
             <td>VirtualBSEImage</td>
             <td>kikuchipy</td>
+        </tr>
+        <tr>
+            <td>virtual_dark_field</td>
+            <td></td>
+            <td>VirtualDarkFieldImage</td>
+            <td>pyxem</td>
         </tr>
     </tbody>
 </table>
