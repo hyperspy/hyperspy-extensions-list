@@ -115,8 +115,8 @@ jobs:
           python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
-        #if: ${{ always() }}
-        if: contains(matrix.EXTENSION_VERSION, 'dev')
+        if: ${{ always() }}
+        #if: contains(matrix.EXTENSION_VERSION, 'dev') # Tests only against development version, if a fix is not released yet.
         run: |
           python -m pytest --pyargs lumispy
 
