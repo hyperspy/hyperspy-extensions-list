@@ -9,6 +9,30 @@
     </thead>
     <tbody>
         <tr>
+            <td>CL_SEM</td>
+            <td>CLSEM, cathodoluminescence SEM</td>
+            <td>CLSEMSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>CL_STEM</td>
+            <td>CLSTEM, cathodoluminescence STEM</td>
+            <td>CLSTEMSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>CL</td>
+            <td>CLSpectrum, cathodoluminescence</td>
+            <td>CLSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>TRCL</td>
+            <td>TR cathodoluminescence, time-resolved cathodoluminescence</td>
+            <td>CLTransient</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
             <td>correlation</td>
             <td></td>
             <td>Correlation2D</td>
@@ -111,6 +135,12 @@
             <td>hyperspy</td>
         </tr>
         <tr>
+            <td>EL</td>
+            <td>ELSpectrum, electroluminescence</td>
+            <td>ELSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
             <td>electron_diffraction</td>
             <td></td>
             <td>ElectronDiffraction1D</td>
@@ -127,6 +157,30 @@
             <td></td>
             <td>HologramImage</td>
             <td>hyperspy</td>
+        </tr>
+        <tr>
+            <td>Luminescence</td>
+            <td>LuminescenceSpectrum</td>
+            <td>LumiSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>Luminescence</td>
+            <td>TRLumi, TR luminescence, time-resolved luminescence</td>
+            <td>LumiTransient</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>PL</td>
+            <td>PLSpectrum, photoluminescence</td>
+            <td>PLSpectrum</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>TRPL</td>
+            <td>TR photoluminescence, time-resolved photoluminescence</td>
+            <td>PLTransient</td>
+            <td>lumispy</td>
         </tr>
         <tr>
             <td>pair_distribution_function</td>
