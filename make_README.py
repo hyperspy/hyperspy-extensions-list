@@ -12,7 +12,7 @@ with open(os.path.join(readme_source_folder, '2-extension_table.md'), "w") as f:
     f.write(table_html)
 
 # Make the README.md by concatenation
-source_file_list = os.listdir(readme_source_folder)
+source_file_list = sorted(os.listdir(readme_source_folder))
 
 with open("README.md", "w") as readme_file:
     for filename in source_file_list:

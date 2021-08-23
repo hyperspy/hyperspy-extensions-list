@@ -1,0 +1,62 @@
+name: Update README.md
+
+on:
+  workflow_dispatch:
+    workflow: "*"
+  schedule:
+    # Run at midnight on each Saturday
+    - cron:  '0 0 * * 6'
+  # Don't run on pull_request because it is not easy to make it secure
+  push:
+    paths:
+      - 'extension_list.txt'
+      - 'readme_source/**'
+      - 'make_README.py'
+    branches:
+      - '*'
+
+jobs:
+  update_readme:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: conda-incubator/setup-miniconda@master
+        with:
+          miniforge-variant: Mambaforge
+          miniforge-version: latest
+          # use base environment, so that when using pip, this is from the
+          # mambaforge distribution
+          auto-activate-base: true
+          activate-environment: ""
+
+      - name: Conda info
+        run: |
+          conda info
+          conda list
+
+      - name: Install extensions
+        run: |
+          mamba install --file extension_list.txt
+          # https://github.com/scikit-image/scikit-image/issues/5528
+          mamba install pooch=1.4.0
+
+      - name: Conda list
+        run: |
+          conda list
+
+      - name: Update README.md
+        run: |
+          python make_README.py
+
+      - name: Push changes to Github
+        run: |
+          git config --global user.name "Automatic README update"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Update README.md"
+          git push

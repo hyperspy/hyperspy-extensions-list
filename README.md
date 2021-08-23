@@ -261,5 +261,3 @@ and send us a pull request.
     </tbody>
 </table>
 
-##
-
