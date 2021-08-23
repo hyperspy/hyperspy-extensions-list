@@ -7,11 +7,15 @@ on:
     # Run at midnight on each Saturday
     - cron:  '0 0 * * 6'
   push:
+    paths:
+      - 'extension_list.txt'
     branches:
       - '*'
   pull_request:
     branches:
       - '*'
+    paths:
+      - 'extension_list.txt'
 
 jobs:
   update_readme:
