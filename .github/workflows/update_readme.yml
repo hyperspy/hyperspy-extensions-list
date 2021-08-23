@@ -42,6 +42,8 @@ jobs:
       - name: Install extensions
         run: |
           mamba install --file extension_list.txt
+          # https://github.com/scikit-image/scikit-image/issues/5528
+          mamba install pooch=1.4.0
 
       - name: Conda list
         run: |
