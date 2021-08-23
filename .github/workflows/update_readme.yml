@@ -6,16 +6,14 @@ on:
   schedule:
     # Run at midnight on each Saturday
     - cron:  '0 0 * * 6'
+  # Don't run on pull_request because it is not easy to make it secure
   push:
     paths:
       - 'extension_list.txt'
+      - 'readme_source/**'
+      - 'make_README.py'
     branches:
       - '*'
-  pull_request:
-    branches:
-      - '*'
-    paths:
-      - 'extension_list.txt'
 
 jobs:
   update_readme:
