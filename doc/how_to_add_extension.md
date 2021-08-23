@@ -9,8 +9,8 @@ To add an extension:
 2. add the name of the extension (name on pypi) to ``extension_list.txt``
 3. Open a pull request to https://github.com/hyperspy/hyperspy-extensions-list
 
-The `README.md` will be updated automatically by a Github workflow, which push
-the updated files to your branch. This workflow runs weekly to keep the
+The `README.md` will be updated automatically by a Github workflow, after the
+pull request is merged. Additionaly, this workflow runs weekly to keep the
 `signal_type` list up to date.
 
 ## Running the `make_readme.py` script manually
