@@ -26,6 +26,8 @@ and send us a pull request.
 ## List of `signal_type`'s provided by the different HyperSpy extensions in alphabetical order
 
 
+##
+
 <table>
     <thead>
         <tr>
@@ -260,6 +262,4 @@ and send us a pull request.
         </tr>
     </tbody>
 </table>
-
-##
 
