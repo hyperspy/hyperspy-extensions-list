@@ -10,8 +10,12 @@ To add an extension:
 3. Open a pull request to https://github.com/hyperspy/hyperspy-extensions-list
 
 The `README.md` will be updated automatically by a Github workflow, after the
-pull request is merged. Additionaly, this workflow runs weekly to keep the
-`signal_type` list up to date.
+pull request is merged. In case github actions are enabled in the repository the
+pull request is coming from, the workflow will run in the fork repository and
+the branch (and therefore the pull request) will be updated when necessary.
+
+Additionaly, this workflow runs weekly to keep the `signal_type` list up to date.
+
 
 ## Running the `make_readme.py` script manually
 
