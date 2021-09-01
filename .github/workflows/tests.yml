@@ -101,7 +101,7 @@ jobs:
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
         run: |
-          pip install https://github.com/lumispy/lumispy/archive/master.zip --no-deps
+          pip install https://github.com/lumispy/lumispy/archive/main.zip --no-deps
           pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps
           pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
 
