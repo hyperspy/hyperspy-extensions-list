@@ -30,13 +30,16 @@ jobs:
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: scipy scikit-learn scikit-image
+            # numba dev version is installed separetely from numba/label/dev channel
+            # others are installed as wheels from
+            # https://pypi.anaconda.org/scipy-wheels-nightly/simple
+            DEPENDENCIES: numba numpy scipy scikit-image scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             LABEL: -dependencies_pre_release
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: matplotlib numba scipy sympy h5py scikit-image
+            DEPENDENCIES: matplotlib numba numpy scipy sympy h5py scikit-image scikit-learn
             USE_MAMBA: false
 
     env:
@@ -67,7 +70,8 @@ jobs:
       - name: Install dependencies development version
         if: ${{ matrix.DEPENDENCIES_DEV }}
         run: |
-          pip install --pre --extra-index-url \
+          mamba install -c numba/label/dev ${{ matrix.DEPENDENCIES }}
+          pip install --upgrade --no-deps --pre -i \
             https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
 
