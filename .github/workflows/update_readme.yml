@@ -57,8 +57,10 @@ jobs:
 
       - name: Push changes to Github
         run: |
-          git config --global user.name "Automatic README update"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "Update README.md"
-          git push
+          if ! git diff --no-ext-diff --quiet --exit-code; then
+            git config --global user.name "Automatic README update"
+            git config --global user.email "actions@github.com"
+            git add .
+            git commit -m "Update README.md"
+            git push
+          fi
