@@ -44,8 +44,6 @@ jobs:
       - name: Install extensions
         run: |
           mamba install --file extension_list.txt
-          # https://github.com/scikit-image/scikit-image/issues/5528
-          mamba install pooch=1.4.0
 
       - name: Conda list
         run: |
@@ -55,10 +53,18 @@ jobs:
         run: |
           python make_README.py
 
+      - name: Git status
+        run: |
+          git status
+          # Get the exit code of the last command and save it to the COMMIT_REQUIRED variable
+          echo "COMMIT_REQUIRED=$(git diff --quiet --exit-code || echo $?)" >> $GITHUB_ENV
+
       - name: Push changes to Github
+        if: ${{ env.COMMIT_REQUIRED == 1 }}
         run: |
           git config --global user.name "Automatic README update"
           git config --global user.email "actions@github.com"
           git add .
           git commit -m "Update README.md"
           git push
+
