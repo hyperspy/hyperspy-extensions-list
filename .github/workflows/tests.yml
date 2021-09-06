@@ -30,7 +30,7 @@ jobs:
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            # numba dev version is installed separetely from numba/label/dev channel
+            # numba dev version is installed separately from numba/label/dev channel
             # others are installed as wheels from
             # https://pypi.anaconda.org/scipy-wheels-nightly/simple
             DEPENDENCIES: numba numpy scipy scikit-image scikit-learn
