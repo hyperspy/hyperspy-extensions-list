@@ -117,7 +117,8 @@ jobs:
       - name: Run Kikuchipy Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs kikuchipy
+          # Remove skipping test when fix is included in a kikuchipy release
+          python -m pytest --pyargs kikuchipy -k "not load_readonly"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
