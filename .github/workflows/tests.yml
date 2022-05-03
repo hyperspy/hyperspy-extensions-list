@@ -130,4 +130,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem
+          python -m pytest --pyargs pyxem -k "not learning_ncc_matrix"
