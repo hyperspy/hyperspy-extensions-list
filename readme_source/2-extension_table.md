@@ -9,6 +9,12 @@
     </thead>
     <tbody>
         <tr>
+            <td>beam_shift</td>
+            <td></td>
+            <td>BeamShift</td>
+            <td>pyxem</td>
+        </tr>
+        <tr>
             <td>CL_SEM</td>
             <td>CLSEM, cathodoluminescence SEM</td>
             <td>CLSEMSpectrum</td>
@@ -27,10 +33,10 @@
             <td>lumispy</td>
         </tr>
         <tr>
-            <td>TRCL</td>
-            <td>TR cathodoluminescence, time-resolved cathodoluminescence</td>
-            <td>CLTransient</td>
-            <td>lumispy</td>
+            <td>correlation</td>
+            <td></td>
+            <td>Correlation1D</td>
+            <td>pyxem</td>
         </tr>
         <tr>
             <td>correlation</td>
@@ -165,21 +171,21 @@
             <td>lumispy</td>
         </tr>
         <tr>
-            <td>Luminescence</td>
+            <td>Transient</td>
             <td>TRLumi, TR luminescence, time-resolved luminescence</td>
             <td>LumiTransient</td>
+            <td>lumispy</td>
+        </tr>
+        <tr>
+            <td>TransientSpec</td>
+            <td>TRLumiSpec, TR luminescence spectrum, time-resolved luminescence spectrum</td>
+            <td>LumiTransientSpectrum</td>
             <td>lumispy</td>
         </tr>
         <tr>
             <td>PL</td>
             <td>PLSpectrum, photoluminescence</td>
             <td>PLSpectrum</td>
-            <td>lumispy</td>
-        </tr>
-        <tr>
-            <td>TRPL</td>
-            <td>TR photoluminescence, time-resolved photoluminescence</td>
-            <td>PLTransient</td>
             <td>lumispy</td>
         </tr>
         <tr>
@@ -204,12 +210,6 @@
             <td>reduced_intensity</td>
             <td></td>
             <td>ReducedIntensity1D</td>
-            <td>pyxem</td>
-        </tr>
-        <tr>
-            <td>template_matching</td>
-            <td></td>
-            <td>TemplateMatchingResults</td>
             <td>pyxem</td>
         </tr>
         <tr>
