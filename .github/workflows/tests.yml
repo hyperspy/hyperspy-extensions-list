@@ -33,7 +33,8 @@ jobs:
             # numba dev version is installed separately from numba/label/dev channel
             # others are installed as wheels from
             # https://pypi.anaconda.org/scipy-wheels-nightly/simple
-            DEPENDENCIES: numba numpy scipy scikit-image scikit-learn
+            # add numpy when it is working again (import error)
+            DEPENDENCIES: numba scipy scikit-image scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             LABEL: -dependencies_pre_release
@@ -111,12 +112,14 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
+          # Remove skipping test when new release include the packaging fix
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail -k "not read_fail and not tvips_file_reader"
 
       - name: Run Kikuchipy Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs kikuchipy
+          # Remove skipping test when fix is included in a kikuchipy release
+          python -m pytest --pyargs kikuchipy -k "not load_readonly"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
@@ -127,4 +130,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem
+          python -m pytest --pyargs pyxem -k "not learning_ncc_matrix"
