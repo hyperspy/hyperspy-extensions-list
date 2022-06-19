@@ -110,6 +110,11 @@ jobs:
           pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps
           pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
 
+      - name: Clear conda and pip cache
+        run: |
+          conda clean --all
+          pip cache purge
+
       - name: Run HyperSpy Test Suite
         run: |
           # Remove skipping test when new release include the packaging fix
