@@ -119,10 +119,10 @@ jobs:
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
 
-      - name: Run Kikuchipy Test Suite
-        if: ${{ always() }}
-        run: |
-          python -m pytest --pyargs kikuchipy
+#      - name: Run Kikuchipy Test Suite
+#        if: ${{ always() }}
+#        run: |
+#          python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
