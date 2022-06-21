@@ -110,16 +110,19 @@ jobs:
           pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps
           pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
 
+      - name: Clear conda and pip cache
+        run: |
+          conda clean --all
+          pip cache purge
+
       - name: Run HyperSpy Test Suite
         run: |
-          # Remove skipping test when new release include the packaging fix
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail -k "not read_fail and not tvips_file_reader"
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
 
-      - name: Run Kikuchipy Test Suite
-        if: ${{ always() }}
-        run: |
-          # Remove skipping test when fix is included in a kikuchipy release
-          python -m pytest --pyargs kikuchipy -k "not load_readonly"
+#      - name: Run Kikuchipy Test Suite
+#        if: ${{ always() }}
+#        run: |
+#          python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
@@ -130,4 +133,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem -k "not learning_ncc_matrix"
+          python -m pytest --pyargs pyxem
