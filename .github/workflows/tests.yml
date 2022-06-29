@@ -119,10 +119,11 @@ jobs:
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
 
-#      - name: Run Kikuchipy Test Suite
-#        if: ${{ always() }}
-#        run: |
-#          python -m pytest --pyargs kikuchipy
+      - name: Run kikuchipy Test Suite
+        if: ${{ always() }}
+        run: |
+          sudo apt-get install xvfb
+          xvfb-run python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
