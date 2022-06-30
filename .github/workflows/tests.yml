@@ -122,6 +122,7 @@ jobs:
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
         run: |
+          # Virtual buffer (xvfb) required for tests using PyVista
           sudo apt-get install xvfb
           xvfb-run python -m pytest --pyargs kikuchipy
 
