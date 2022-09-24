@@ -106,14 +106,20 @@ jobs:
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
         run: |
-          pip install https://github.com/lumispy/lumispy/archive/main.zip --no-deps
-          pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps
-          pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps
+          # Needs to use --force-reinstall in case the development version is incorrect
+          # and pip doesn't update it
+          pip install https://github.com/lumispy/lumispy/archive/main.zip --no-deps --force-reinstall
+          pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps --force-reinstall
+          pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps --force-reinstall
 
       - name: Clear conda and pip cache
         run: |
           conda clean --all
           pip cache purge
+
+      - name: Conda list
+        run: |
+          conda list
 
       - name: Run HyperSpy Test Suite
         run: |
@@ -135,4 +141,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping"
+          python -m pytest --pyargs pyxem
