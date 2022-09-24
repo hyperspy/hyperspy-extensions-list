@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        HYPERSPY_VERSION: ['release', 'RnP', 'RnM']
+        HYPERSPY_VERSION: ['release', 'RnPatch', 'RnMinor', 'RnMajor']
         EXTENSION_VERSION: ['release', 'dev']
         DEPENDENCIES_DEV: [false]
         DEPENDENCIES_PRE_RELEASE: [false]
@@ -31,7 +31,17 @@ jobs:
             # Install dev version from https://pypi.anaconda.org/scipy-wheels-nightly/simple
             # using pip
             LABEL: -dependencies_dev
-            HYPERSPY_VERSION: 'RnM'
+            HYPERSPY_VERSION: 'RnMinor'
+            EXTENSION_VERSION: 'dev'
+            # numba dev version is installed separately from numba/label/dev channel
+            # others are installed as wheels from
+            # https://pypi.anaconda.org/scipy-wheels-nightly/simple
+            # add numpy when it is working again (import error)
+            DEPENDENCIES: numba scipy scikit-image scikit-learn
+            USE_MAMBA: false
+          - DEPENDENCIES_DEV: true
+            LABEL: -dependencies_dev
+            HYPERSPY_VERSION: 'RnMajor'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: matplotlib scipy scikit-learn
             USE_MAMBA: false
@@ -39,7 +49,7 @@ jobs:
           - DEPENDENCIES_PRE_RELEASE: true
             # Install RC version available on pypi
             LABEL: -dependencies_pre_release
-            HYPERSPY_VERSION: 'RnM'
+            HYPERSPY_VERSION: 'RnMinor'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: matplotlib scipy scikit-learn sympy h5py scikit-image numba
             USE_MAMBA: false
@@ -114,21 +124,21 @@ jobs:
         if: contains(matrix.HYPERSPY_VERSION, 'release')
         run: |
           mamba install hyperspy-base
-
-      - name: Install HyperSpy RnP
-        if: contains(matrix.HYPERSPY_VERSION, 'RnP')
+        
+      - name: Install HyperSpy RnPatch
+        if: contains(matrix.HYPERSPY_VERSION, 'RnPatch')
         run: |
           pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_patch.zip
 
-      - name: Install HyperSpy RnM
-        if: contains(matrix.HYPERSPY_VERSION, 'RnM')
+      - name: Install HyperSpy RnMinor
+        if: contains(matrix.HYPERSPY_VERSION, 'RnMinor')
         run: |
           pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_minor.zip
 
-      - name: Install Extension Release
-        if: contains(matrix.EXTENSION_VERSION, 'release')
+      - name: Install HyperSpy RnMajor
+        if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
-          mamba install ${{ env.EXTENSION }}
+          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_major.zip
 
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
@@ -149,6 +159,11 @@ jobs:
       - name: Run HyperSpy Test Suite
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2
+
+      - name: Run RosettaScio Test Suite
+        if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
+        run: |
+          python -m pytest --pyargs rsciio
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
