@@ -115,6 +115,10 @@ jobs:
           conda clean --all
           pip cache purge
 
+      - name: Conda list
+        run: |
+          conda list
+
       - name: Run HyperSpy Test Suite
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
