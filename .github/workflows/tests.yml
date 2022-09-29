@@ -141,4 +141,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem
+          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping"
