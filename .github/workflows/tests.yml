@@ -130,7 +130,8 @@ jobs:
         run: |
           # Virtual buffer (xvfb) required for tests using PyVista
           sudo apt-get install xvfb
-          xvfb-run python -m pytest --pyargs kikuchipy
+          # for tests skip, see https://github.com/pyxem/kikuchipy/issues/565
+          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_chunk_bytes and not test_get_chunking"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
@@ -141,4 +142,6 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping"
+          # for tests skip, see https://github.com/pyxem/pyxem/issues/856, pending release
+          # for tests skip, see https://github.com/pyxem/pyxem/issues/877
+          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping and not test_chunk_bytes"
