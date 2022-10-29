@@ -130,8 +130,7 @@ jobs:
         run: |
           # Virtual buffer (xvfb) required for tests using PyVista
           sudo apt-get install xvfb
-          # for tests skip, see https://github.com/pyxem/kikuchipy/issues/565
-          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_chunk_bytes and not test_get_chunking"
+          xvfb-run python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
