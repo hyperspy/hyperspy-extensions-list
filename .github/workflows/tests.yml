@@ -121,13 +121,7 @@ jobs:
         run: |
           conda list
 
-      - name: Run HyperSpy Test Suite (Release)
-        if: contains(matrix.HYPERSPY_VERSION, 'release')
-        run: |
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail -k "not test_random_state_lazy and not test_lazy_add_"
-
-      - name: Run HyperSpy Test Suite (Dev)
-        if: contains(matrix.HYPERSPY_VERSION, 'Rn')
+      - name: Run HyperSpy Test Suite
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
 
@@ -136,8 +130,7 @@ jobs:
         run: |
           # Virtual buffer (xvfb) required for tests using PyVista
           sudo apt-get install xvfb
-          # for tests skip, see https://github.com/pyxem/kikuchipy/issues/565
-          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_chunk_bytes and not test_get_chunking"
+          xvfb-run python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
