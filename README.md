@@ -146,8 +146,14 @@ and send us a pull request.
         </tr>
         <tr>
             <td>EBSDMasterPattern</td>
-            <td>ebsd_masterpattern, masterpattern</td>
+            <td>ebsd_master_pattern, master_pattern</td>
             <td>EBSDMasterPattern</td>
+            <td>kikuchipy</td>
+        </tr>
+        <tr>
+            <td>ECPMasterPattern</td>
+            <td>ecp_master_pattern</td>
+            <td>ECPMasterPattern</td>
             <td>kikuchipy</td>
         </tr>
         <tr>
