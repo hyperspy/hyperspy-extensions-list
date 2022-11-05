@@ -32,9 +32,7 @@ jobs:
             EXTENSION_VERSION: 'dev'
             # numba dev version is installed separately from numba/label/dev channel
             # others are installed as wheels from
-            # https://pypi.anaconda.org/scipy-wheels-nightly/simple
-            # add numpy when it is working again (import error)
-            DEPENDENCIES: numba scipy scikit-image scikit-learn
+            DEPENDENCIES: numpy numba scipy scikit-image scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             LABEL: -dependencies_pre_release
