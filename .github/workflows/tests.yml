@@ -23,28 +23,37 @@ jobs:
         EXTENSION_VERSION: ['release', 'dev']
         DEPENDENCIES_DEV: [false]
         DEPENDENCIES_PRE_RELEASE: [false]
+        DEPENDENCIES_NUMBA_DEV: [false]
         USE_MAMBA: [true]
         include:
           # test against upstream dev
           - DEPENDENCIES_DEV: true
+            # Install dev version from https://pypi.anaconda.org/scipy-wheels-nightly/simple
+            # using pip
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            # numba dev version is installed separately from numba/label/dev channel
-            # others are installed as wheels from
-            DEPENDENCIES: numpy numba scipy scikit-image scikit-learn
+            DEPENDENCIES: numpy scipy scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
+            # Install RC version available on pypi
             LABEL: -dependencies_pre_release
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: matplotlib numba numpy scipy sympy h5py scikit-image scikit-learn
+            DEPENDENCIES: matplotlib numpy scipy sympy h5py scikit-image scikit-learn
             USE_MAMBA: false
+          - DEPENDENCIES_NUMBA_DEV: true
+            # Instal dev version from numba/label/dev channel using mamba
+            LABEL: -dependencies_numba_dev
+            HYPERSPY_VERSION: 'RnM'
+            EXTENSION_VERSION: 'dev'
+            DEPENDENCIES: numba
+            USE_MAMBA: true
 
     env:
       MPLBACKEND: agg
       EXTENSION: kikuchipy lumispy pyxem
-      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail
+      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail pytest-mpl
     defaults:
       run:
         shell: bash -l {0}
@@ -66,19 +75,6 @@ jobs:
           conda info
           conda list
 
-      - name: Install dependencies development version
-        if: ${{ matrix.DEPENDENCIES_DEV }}
-        run: |
-          mamba install -c numba/label/dev ${{ matrix.DEPENDENCIES }}
-          pip install --upgrade --no-deps --pre -i \
-            https://pypi.anaconda.org/scipy-wheels-nightly/simple \
-            ${{ matrix.DEPENDENCIES }}
-
-      - name: Install dependencies pre release version
-        if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
-        run: |
-          pip install --pre ${{ matrix.DEPENDENCIES }}
-
       - name: Install extensions and Test dependencies
         run: |
           if [ ${{ matrix.USE_MAMBA }} == true ] ; then
@@ -86,6 +82,25 @@ jobs:
           else
             pip install hyperspy ${{ env.EXTENSION }} ${{ env.TEST_DEPS }}
           fi
+
+      - name: Install numba development version
+        if: ${{ matrix.DEPENDENCIES_NUMBA_DEV }}
+        run: |
+          # Install numba dev version
+          mamba update -c numba/label/dev ${{ matrix.DEPENDENCIES }}
+
+      - name: Install dependencies development version
+        if: ${{ matrix.DEPENDENCIES_DEV }}
+        run: |
+          pip install --upgrade --pre --extra-index-url \
+            https://pypi.anaconda.org/scipy-wheels-nightly/simple \
+            ${{ matrix.DEPENDENCIES }}
+          pip install https://github.com/scikit-image/scikit-image/archive/main.zip
+
+      - name: Install dependencies pre release version
+        if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
+        run: |
+          pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
 
       - name: Conda list
         run: |
@@ -108,7 +123,7 @@ jobs:
           # and pip doesn't update it
           pip install https://github.com/lumispy/lumispy/archive/main.zip --no-deps --force-reinstall
           pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps --force-reinstall
-          pip install https://github.com/pyxem/pyxem/archive/master.zip --no-deps --force-reinstall
+          pip install https://github.com/pyxem/pyxem/archive/main.zip --no-deps --force-reinstall
 
       - name: Clear conda and pip cache
         run: |
@@ -119,9 +134,15 @@ jobs:
         run: |
           conda list
 
+      - name: Remove test
+        # Remove delete test file when hyperspy 2.0 is released
+        # See https://github.com/hyperspy/hyperspy/pull/3097
+        run: |
+          python -c "import hyperspy, os, pathlib; os.remove(pathlib.Path(hyperspy.__file__).parent / 'tests' / 'drawing' / 'test_plot_signal1d.py')"
+
       - name: Run HyperSpy Test Suite
         run: |
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2 --instafail
+          python -m pytest --pyargs hyperspy
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
