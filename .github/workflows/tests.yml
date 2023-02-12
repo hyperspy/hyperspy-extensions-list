@@ -33,7 +33,7 @@ jobs:
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: numpy scipy scikit-image scikit-learn
+            DEPENDENCIES: numpy scipy scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             # Install RC version available on pypi
@@ -92,14 +92,15 @@ jobs:
       - name: Install dependencies development version
         if: ${{ matrix.DEPENDENCIES_DEV }}
         run: |
-          pip install --upgrade --no-dep --pre -i \
+          pip install --upgrade --pre --extra-index-url \
             https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
+          pip install https://github.com/scikit-image/scikit-image/archive/main.zip
 
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
         run: |
-          pip install --pre ${{ matrix.DEPENDENCIES }}
+          pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
 
       - name: Conda list
         run: |
