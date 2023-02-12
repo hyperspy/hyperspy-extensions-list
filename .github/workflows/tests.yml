@@ -122,7 +122,7 @@ jobs:
           # Needs to use --force-reinstall in case the development version is incorrect
           # and pip doesn't update it
           pip install https://github.com/lumispy/lumispy/archive/main.zip --no-deps --force-reinstall
-          pip install https://github.com/pyxem/kikuchipy/archive/main.zip --no-deps --force-reinstall
+          pip install https://github.com/pyxem/kikuchipy/archive/develop.zip --no-deps --force-reinstall
           pip install https://github.com/pyxem/pyxem/archive/main.zip --no-deps --force-reinstall
 
       - name: Clear conda and pip cache
