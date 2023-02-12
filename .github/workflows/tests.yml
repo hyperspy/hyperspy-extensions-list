@@ -44,7 +44,7 @@ jobs:
     env:
       MPLBACKEND: agg
       EXTENSION: kikuchipy lumispy pyxem
-      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail
+      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail pytest-mpl
     defaults:
       run:
         shell: bash -l {0}
