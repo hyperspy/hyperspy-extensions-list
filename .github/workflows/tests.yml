@@ -149,7 +149,8 @@ jobs:
         run: |
           # Virtual buffer (xvfb) required for tests using PyVista
           sudo apt-get install xvfb
-          xvfb-run python -m pytest --pyargs kikuchipy
+          # https://github.com/pyxem/kikuchipy/issues/614
+          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_hough_indexing_lazy and not test_optimize_pc_lazy"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
