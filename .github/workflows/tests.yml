@@ -53,7 +53,7 @@ jobs:
     env:
       MPLBACKEND: agg
       EXTENSION: kikuchipy lumispy pyxem
-      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-instafail pytest-mpl
+      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl
     defaults:
       run:
         shell: bash -l {0}
@@ -143,7 +143,7 @@ jobs:
       - name: Run HyperSpy Test Suite
         run: |
           # Remove -k "..." when hyperspy > 1.7.3 is released
-          python -m pytest --pyargs hyperspy -k "not test_add_marker_signal2d_navigation_dim_vertical_line and not test_plot_images_multi_signal_w_axes_replot "
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
