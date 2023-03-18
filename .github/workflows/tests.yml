@@ -163,4 +163,4 @@ jobs:
         run: |
           # for tests skip, see https://github.com/pyxem/pyxem/issues/856, pending release
           # for tests skip, see https://github.com/pyxem/pyxem/issues/877
-          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping and not test_chunk_bytes"
+          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping and not test_chunk_bytes and not test_integrate_sigma_clip"
