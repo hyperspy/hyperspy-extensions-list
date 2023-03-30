@@ -142,7 +142,6 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          # Remove -k "..." when hyperspy > 1.7.3 is released
           python -m pytest --pyargs hyperspy --reruns 3 -n 2
 
       - name: Run kikuchipy Test Suite
