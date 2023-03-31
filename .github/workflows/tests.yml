@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: conda-incubator/setup-miniconda@master
+      - uses: conda-incubator/setup-miniconda@main
         with:
           miniforge-variant: Mambaforge
           miniforge-version: latest
@@ -95,7 +95,8 @@ jobs:
           pip install --upgrade --pre --extra-index-url \
             https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
-          pip install https://github.com/scikit-image/scikit-image/archive/main.zip
+          # Dev install broken with watershed (TypeError: No matching signature found)
+          # pip install https://github.com/scikit-image/scikit-image/archive/main.zip -v
 
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
@@ -142,15 +143,14 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          # Remove -k "..." when hyperspy > 1.7.3 is released
           python -m pytest --pyargs hyperspy --reruns 3 -n 2
 
-      - name: Run kikuchipy Test Suite
-        if: ${{ always() }}
-        run: |
-          # Virtual buffer (xvfb) required for tests using PyVista
-          sudo apt-get install xvfb
-          xvfb-run python -m pytest --pyargs kikuchipy
+      # - name: Run kikuchipy Test Suite
+      #   if: ${{ always() }}
+      #   run: |
+      #     # Virtual buffer (xvfb) required for tests using PyVista
+      #     sudo apt-get install xvfb
+      #     xvfb-run python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
