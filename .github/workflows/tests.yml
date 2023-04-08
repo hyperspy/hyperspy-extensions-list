@@ -43,7 +43,7 @@ jobs:
             DEPENDENCIES: matplotlib numpy scipy sympy h5py scikit-image scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_NUMBA_DEV: true
-            # Instal dev version from numba/label/dev channel using mamba
+            # Install dev version from numba/label/dev channel using mamba
             LABEL: -dependencies_numba_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
@@ -145,12 +145,12 @@ jobs:
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2
 
-      # - name: Run kikuchipy Test Suite
-      #   if: ${{ always() }}
-      #   run: |
-      #     # Virtual buffer (xvfb) required for tests using PyVista
-      #     sudo apt-get install xvfb
-      #     xvfb-run python -m pytest --pyargs kikuchipy
+      - name: Run kikuchipy Test Suite
+        if: ${{ always() }}
+        run: |
+          # Virtual buffer (xvfb) required for tests using PyVista
+          sudo apt-get install xvfb
+          xvfb-run python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
