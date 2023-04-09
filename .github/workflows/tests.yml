@@ -135,12 +135,6 @@ jobs:
         run: |
           conda list
 
-      - name: Remove test
-        # Remove delete test file when hyperspy 2.0 is released
-        # See https://github.com/hyperspy/hyperspy/pull/3097
-        run: |
-          python -c "import hyperspy, os, pathlib; os.remove(pathlib.Path(hyperspy.__file__).parent / 'tests' / 'drawing' / 'test_plot_signal1d.py')"
-
       - name: Run HyperSpy Test Suite
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2
