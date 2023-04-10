@@ -33,14 +33,14 @@ jobs:
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: numpy scipy scikit-learn
+            DEPENDENCIES: matplotlib scipy scikit-learn
             USE_MAMBA: false
           - DEPENDENCIES_PRE_RELEASE: true
             # Install RC version available on pypi
             LABEL: -dependencies_pre_release
             HYPERSPY_VERSION: 'RnM'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: matplotlib numpy scipy sympy h5py scikit-image scikit-learn
+            DEPENDENCIES: matplotlib scipy scikit-learn sympy h5py scikit-image
             USE_MAMBA: false
           - DEPENDENCIES_NUMBA_DEV: true
             # Install dev version from numba/label/dev channel using mamba
