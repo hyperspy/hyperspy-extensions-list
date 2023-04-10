@@ -135,12 +135,6 @@ jobs:
         run: |
           conda list
 
-      - name: Remove test
-        # Remove delete test file when hyperspy 2.0 is released
-        # See https://github.com/hyperspy/hyperspy/pull/3097
-        run: |
-          python -c "import hyperspy, os, pathlib; os.remove(pathlib.Path(hyperspy.__file__).parent / 'tests' / 'drawing' / 'test_plot_signal1d.py')"
-
       - name: Run HyperSpy Test Suite
         run: |
           python -m pytest --pyargs hyperspy --reruns 3 -n 2
@@ -161,6 +155,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          # for tests skip, see https://github.com/pyxem/pyxem/issues/856, pending release
-          # for tests skip, see https://github.com/pyxem/pyxem/issues/877
-          python -m pytest --pyargs pyxem -k "not test_correlations_wrapping and not test_chunk_bytes and not test_integrate_sigma_clip"
+          python -m pytest --pyargs pyxem
