@@ -137,7 +137,8 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2
+          # https://github.com/hyperspy/hyperspy/pull/3124
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2 -k "not test_variable_sigma"
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
