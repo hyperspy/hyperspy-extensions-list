@@ -15,13 +15,13 @@ and send us a pull request.
 
 # (Known) HyperSpy extensions
 
-| Package name                                                                   | Brief description                                                    |
-|--------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                      |
-| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                        |
-| [KikuchiPy](https://github.com/kikuchipy/kikuchipy)                            | Processing and analysis of electron backscatter diffraction patterns |
-| [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                           |
-| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                             |
+| Package name                                                                   | Brief description                                                                |
+|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                  |
+| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                    |
+| [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns |
+| [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                       |
+| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                         |
 
 ## List of `signal_type` classes provided by the different HyperSpy extensions in alphabetical order
 
@@ -124,6 +124,12 @@ and send us a pull request.
             <td>diffraction_vectors</td>
             <td></td>
             <td>DiffractionVectors</td>
+            <td>pyxem</td>
+        </tr>
+        <tr>
+            <td>diffraction_vectors</td>
+            <td></td>
+            <td>DiffractionVectors1D</td>
             <td>pyxem</td>
         </tr>
         <tr>

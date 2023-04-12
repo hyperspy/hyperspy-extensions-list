@@ -101,6 +101,12 @@
         <tr>
             <td>diffraction_vectors</td>
             <td></td>
+            <td>DiffractionVectors1D</td>
+            <td>pyxem</td>
+        </tr>
+        <tr>
+            <td>diffraction_vectors</td>
+            <td></td>
             <td>DiffractionVectors2D</td>
             <td>pyxem</td>
         </tr>
