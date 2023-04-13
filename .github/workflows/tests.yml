@@ -95,8 +95,7 @@ jobs:
           pip install --upgrade --pre --extra-index-url \
             https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
-          # Dev install broken with watershed (TypeError: No matching signature found)
-          # pip install https://github.com/scikit-image/scikit-image/archive/main.zip -v
+          pip install https://github.com/scikit-image/scikit-image/archive/main.zip
 
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
@@ -156,4 +155,5 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem
+          # https://github.com/pyxem/pyxem/pull/921
+          python -m pytest --pyargs pyxem -k "not test_separate and not test_get_vdf_segments"
