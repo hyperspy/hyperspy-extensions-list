@@ -95,8 +95,7 @@ jobs:
           pip install --upgrade --pre --extra-index-url \
             https://pypi.anaconda.org/scipy-wheels-nightly/simple \
             ${{ matrix.DEPENDENCIES }}
-          # Dev install broken with watershed (TypeError: No matching signature found)
-          # pip install https://github.com/scikit-image/scikit-image/archive/main.zip -v
+          pip install https://github.com/scikit-image/scikit-image/archive/main.zip
 
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
