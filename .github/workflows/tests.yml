@@ -133,7 +133,7 @@ jobs:
         run: |
           # Remove imageio pinning when hyperspy > 1.7.4 is released
           # https://github.com/hyperspy/hyperspy/pull/3138
-          mamba install ${{ env.EXTENSION }} imageio=2.27
+          mamba install ${{ env.EXTENSION }} imageio=2.27 vtk=*=qt*
 
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
