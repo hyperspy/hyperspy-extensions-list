@@ -2,7 +2,6 @@ name: Integration tests
 
 on:
   workflow_dispatch:
-    workflow: "*"
   schedule:
     - cron:  '10 0 * * *'
   push:
@@ -114,9 +113,7 @@ jobs:
       - name: Install HyperSpy release
         if: contains(matrix.HYPERSPY_VERSION, 'release')
         run: |
-          # Remove imageio pinning when hyperspy > 1.7.4 is released
-          # https://github.com/hyperspy/hyperspy/pull/3138
-          mamba install hyperspy-base imageio=2.27
+          mamba install hyperspy-base
 
       - name: Install HyperSpy RnP
         if: contains(matrix.HYPERSPY_VERSION, 'RnP')
@@ -131,9 +128,7 @@ jobs:
       - name: Install Extension Release
         if: contains(matrix.EXTENSION_VERSION, 'release')
         run: |
-          # Remove imageio pinning when hyperspy > 1.7.4 is released
-          # https://github.com/hyperspy/hyperspy/pull/3138
-          mamba install ${{ env.EXTENSION }} imageio=2.27 vtk=*=qt*
+          mamba install ${{ env.EXTENSION }}
 
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
@@ -153,8 +148,7 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          # https://github.com/hyperspy/hyperspy/pull/3124
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2 -k "not test_variable_sigma"
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
