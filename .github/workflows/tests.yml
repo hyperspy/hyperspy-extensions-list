@@ -166,5 +166,4 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          # https://github.com/pyxem/pyxem/pull/921
-          python -m pytest --pyargs pyxem -k "not test_separate and not test_get_vdf_segments"
+          python -m pytest --pyargs pyxem
