@@ -61,6 +61,7 @@ jobs:
           - DEPENDENCIES_NUMBA_DEV: true
             # Install dev version from numba/label/dev channel using mamba
             LABEL: -dependencies_numba_dev
+            RSIO_VERSION: 'dev'
             HYPERSPY_VERSION: 'RnMajor'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: numba
@@ -93,9 +94,9 @@ jobs:
           # auto-activate-base: true
           activate-environment: "test"
 
-      - name: Install pip
+      - name: Install pip and Test dependencies
         run: |
-          mamba install pip
+          mamba install pip ${{ env.TEST_DEPS }}
 
       - name: Conda info
         run: |
@@ -121,10 +122,6 @@ jobs:
         run: |
           pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
 
-      - name: Install Test dependencies
-        run: |
-          pip install ${{ env.TEST_DEPS }}
-
       - name: Conda list
         run: |
           conda list
@@ -148,17 +145,17 @@ jobs:
       - name: Install HyperSpy RnPatch
         if: contains(matrix.HYPERSPY_VERSION, 'RnPatch')
         run: |
-          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_patch.zip#egg=hyperspy[all,tests]
+          pip install "hyperspy[all] @ https://github.com/hyperspy/hyperspy/archive/RELEASE_next_patch.zip"
 
       - name: Install HyperSpy RnMinor
         if: contains(matrix.HYPERSPY_VERSION, 'RnMinor')
         run: |
-          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_minor.zip#egg=hyperspy[all,tests]
+          pip install "hyperspy[all] @ https://github.com/hyperspy/hyperspy/archive/RELEASE_next_minor.zip"
 
       - name: Install HyperSpy RnMajor
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
-          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_major.zip#egg=hyperspy[all,tests]
+          pip install "hyperspy[all] @ https://github.com/hyperspy/hyperspy/archive/RELEASE_next_major.zip"
   
       - name: Install Extension Release
         if: contains(matrix.EXTENSION_VERSION, 'release')
