@@ -47,9 +47,8 @@ jobs:
             HYPERSPY_VERSION: 'RnMajor'
             RSIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
-            DEPENDENCIES: matplotlib scipy scikit-learn
+            DEPENDENCIES: numba scipy scikit-image scikit-learn
             USE_MAMBA: false
-            PYTHON_VERSION: '3.10'
           - DEPENDENCIES_PRE_RELEASE: true
             # Install RC version available on pypi
             LABEL: -dependencies_pre_release
@@ -62,7 +61,7 @@ jobs:
           - DEPENDENCIES_NUMBA_DEV: true
             # Install dev version from numba/label/dev channel using mamba
             LABEL: -dependencies_numba_dev
-            HYPERSPY_VERSION: 'RnMinor'
+            HYPERSPY_VERSION: 'RnMajor'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: numba
             USE_MAMBA: true
