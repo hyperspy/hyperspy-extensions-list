@@ -186,7 +186,8 @@ jobs:
       - name: Run RosettaScio Test Suite
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
-          python -m pytest --pyargs rsciio -n 2
+          # Not possible to use "-n 2" because downloading test files will be ignored
+          python -m pytest --pyargs rsciio
 
       # - name: Run kikuchipy Test Suite
       #   if: ${{ contains(matrix.HYPERSPY_VERSION, 'RnMajor') == false }}
