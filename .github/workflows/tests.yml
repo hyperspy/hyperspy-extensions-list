@@ -13,12 +13,14 @@ on:
 
 jobs:
   integration_test:
-    name: py${{ matrix.PYTHON_VERSION }}-hs_${{ matrix.HYPERSPY_VERSION }}-ext_${{ matrix.EXTENSION_VERSION }}${{ matrix.LABEL }}
+    name: rs_${{ matrix.RSIO_VERSION }}-hs_${{ matrix.HYPERSPY_VERSION }}-ext_${{ matrix.EXTENSION_VERSION }}${{ matrix.LABEL }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         HYPERSPY_VERSION: ['release', 'RnPatch', 'RnMinor', 'RnMajor']
+        # When RostteSciIO is released, extent build matrix with released version
+        RSIO_VERSION: ['release']
         EXTENSION_VERSION: ['release', 'dev']
         DEPENDENCIES_DEV: [false]
         DEPENDENCIES_PRE_RELEASE: [false]
@@ -32,6 +34,7 @@ jobs:
             # using pip
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnMinor'
+            RSIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
             # numba dev version is installed separately from numba/label/dev channel
             # others are installed as wheels from
@@ -42,6 +45,7 @@ jobs:
           - DEPENDENCIES_DEV: true
             LABEL: -dependencies_dev
             HYPERSPY_VERSION: 'RnMajor'
+            RSIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: matplotlib scipy scikit-learn
             USE_MAMBA: false
@@ -50,6 +54,7 @@ jobs:
             # Install RC version available on pypi
             LABEL: -dependencies_pre_release
             HYPERSPY_VERSION: 'RnMinor'
+            RSIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: matplotlib scipy scikit-learn sympy h5py scikit-image numba
             USE_MAMBA: false
@@ -57,11 +62,16 @@ jobs:
           - DEPENDENCIES_NUMBA_DEV: true
             # Install dev version from numba/label/dev channel using mamba
             LABEL: -dependencies_numba_dev
-            HYPERSPY_VERSION: 'RnM'
+            HYPERSPY_VERSION: 'RnMinor'
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: numba
             USE_MAMBA: true
             PYTHON_VERSION: '3.11'
+        exclude:
+          # Don't test RELEASE_next_major with released version of extension as
+          # they don't support the hyperspy 2.0 API changes
+          - HYPERSPY_VERSION: 'RnMajor'
+            EXTENSION_VERSION: 'release'
 
     env:
       MPLBACKEND: agg
@@ -120,11 +130,22 @@ jobs:
         run: |
           conda list
 
+      - name: Install RosettaSciIO release
+        if: contains(matrix.RSIO_VERSION, 'release')
+        run: |
+          # Use mamba when package is available on conda-forge
+          pip install rosettasciio[all]
+
+      - name: Install RosettaSciIO dev
+        if: contains(matrix.RSIO_VERSION, 'dev')
+        run: |
+          pip install "rosettasciio[all] @ https://github.com/hyperspy/rosettasciio/archive/main.zip"
+
       - name: Install HyperSpy release
         if: contains(matrix.HYPERSPY_VERSION, 'release')
         run: |
           mamba install hyperspy-base
-        
+
       - name: Install HyperSpy RnPatch
         if: contains(matrix.HYPERSPY_VERSION, 'RnPatch')
         run: |
@@ -138,7 +159,15 @@ jobs:
       - name: Install HyperSpy RnMajor
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
-          pip install https://github.com/hyperspy/hyperspy/archive/RELEASE_next_major.zip
+          # Use more simple syntax when packaging is sorted
+          # pip install https://github.com/hyperspy/rosettasciio/archive/refs/heads/main.zip#egg=rosettasciio[all]
+          git clone --depth 1 https://github.com/hyperspy/rosettasciio.git
+          pip install -e rosettasciio[all] 
+  
+      - name: Install Extension Release
+        if: contains(matrix.EXTENSION_VERSION, 'release')
+        run: |
+          mamba install ${{ env.EXTENSION }}
 
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
@@ -163,14 +192,12 @@ jobs:
       - name: Run RosettaScio Test Suite
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
-          python -m pytest --pyargs rsciio
+          python -m pytest --pyargs rsciio -n 2
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
         run: |
-          # Virtual buffer (xvfb) required for tests using PyVista
-          sudo apt-get install xvfb
-          xvfb-run python -m pytest --pyargs kikuchipy
+          python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
