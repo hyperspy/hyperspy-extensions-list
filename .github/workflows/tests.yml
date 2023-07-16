@@ -187,7 +187,8 @@ jobs:
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
           # Not possible to use "-n 2" because downloading test files will be ignored
-          python -m pytest --pyargs rsciio
+          # Test fixed in dev branch but not release yet
+          python -m pytest --pyargs rsciio -k "not (TestSpec and test_metadata)"
 
       # - name: Run kikuchipy Test Suite
       #   if: ${{ contains(matrix.HYPERSPY_VERSION, 'RnMajor') == false }}
@@ -203,4 +204,5 @@ jobs:
       - name: Run Pyxem Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs pyxem
+          # Failure most likely related to numpy 1.25
+          python -m pytest --pyargs pyxem -k "not (TestMake4dPeakArrayTestData and test_rotation)"
