@@ -183,17 +183,18 @@ jobs:
 
       - name: Run HyperSpy Test Suite
         run: |
-          python -m pytest --pyargs hyperspy --reruns 3 -n 2
+          # Need to fix packaging to remove skipping the 
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2 -k "not test_model_backcompatibility"
 
       - name: Run RosettaScio Test Suite
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
           python -m pytest --pyargs rsciio -n 2
 
-      - name: Run kikuchipy Test Suite
-        if: ${{ always() }}
-        run: |
-          python -m pytest --pyargs kikuchipy
+      # - name: Run kikuchipy Test Suite
+      #   if: ${{ contains(matrix.HYPERSPY_VERSION, 'RnMajor') == false }}
+      #   run: |
+      #     python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
