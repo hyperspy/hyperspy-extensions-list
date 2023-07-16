@@ -74,8 +74,7 @@ jobs:
             EXTENSION_VERSION: 'release'
 
     env:
-      MPLBACKEND: agg
-      EXTENSION: kikuchipy lumispy pyxem
+      EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem
       TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl
     defaults:
       run:
@@ -94,9 +93,9 @@ jobs:
           # auto-activate-base: true
           activate-environment: "test"
 
-      - name: Install pip and Test dependencies
+      - name: Install pip pyqt and Test dependencies
         run: |
-          mamba install pip ${{ env.TEST_DEPS }}
+          mamba install pip pyqt ${{ env.TEST_DEPS }}
 
       - name: Conda info
         run: |
@@ -167,6 +166,8 @@ jobs:
           pip install https://github.com/lumispy/lumispy/archive/main.zip
           pip install https://github.com/pyxem/kikuchipy/archive/develop.zip
           pip install https://github.com/pyxem/pyxem/archive/main.zip
+          pip install https://github.com/hyperspy/hyperspy_gui_ipywidgets/archive/main.zip
+          pip install https://github.com/hyperspy/hyperspy_gui_traitsui/archive/main.zip
 
       - name: Clear conda and pip cache
         run: |
@@ -188,6 +189,17 @@ jobs:
           # Not possible to use "-n 2" because downloading test files will be ignored
           # Test fixed in dev branch but not release yet
           python -m pytest --pyargs rsciio -k "not (TestSpec and test_metadata)"
+
+      - name: Run hyperspy_gui_ipywidgets Test Suite
+        if: ${{ always() }}
+        run: |
+          python -m pytest --pyargs hyperspy_gui_ipywidgets -k "not test_spikes_removal_tool and not test_eels_table_tool"
+  
+      - name: Run hyperspy_gui_traitsui Test Suite
+        if: ${{ always() }}
+        # run the tests headlessly
+        run: |
+          xvfb-run python -m pytest --pyargs hyperspy_gui_traitsui
 
       # - name: Run kikuchipy Test Suite
       #   if: ${{ contains(matrix.HYPERSPY_VERSION, 'RnMajor') == false }}
