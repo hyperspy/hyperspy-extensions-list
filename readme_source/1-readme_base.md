@@ -17,6 +17,7 @@ and send us a pull request.
 
 | Package name                                                                   | Brief description                                                                |
 |--------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| [holospy](https://github.com/hyperspy/holospy)                                 | Electron holography                                                              |
 | [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                  |
 | [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                    |
 | [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns |
