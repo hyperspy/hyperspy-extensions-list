@@ -64,7 +64,8 @@ jobs:
     env:
       # EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
       EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui lumispy pyxem exspy holospy
-      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl
+      # Unpin pytest, when pyxem 0.18 is release
+      TEST_DEPS: pytest==7.4.4 pytest-xdist pytest-rerunfailures pytest-mpl
     defaults:
       run:
         shell: bash -l {0}
@@ -212,7 +213,6 @@ jobs:
           python -m pytest --pyargs lumispy
 
       - name: Run Pyxem Test Suite
-        # if: ${{ always() }}
-        if: contains(matrix.EXTENSION_VERSION, 'dev') # Tests only against development version, if a fix is not released yet.
+        if: ${{ always() }}
         run: |
           python -m pytest --pyargs pyxem
