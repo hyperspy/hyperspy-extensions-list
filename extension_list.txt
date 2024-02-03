@@ -1,3 +1,5 @@
+exspy
+holospy
 hyperspy
 kikuchipy
 lumispy

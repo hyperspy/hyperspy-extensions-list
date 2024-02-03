@@ -15,12 +15,15 @@ and send us a pull request.
 
 # (Known) HyperSpy extensions
 
-| Package name                                                                   | Brief description                                                                |
-|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                  |
-| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                    |
-| [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns |
-| [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                       |
-| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                         |
+| Package name                                                                   | Brief description                                                                      |
+|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| [exspy](https://github.com/hyperspy/exspy)                                     | Electron energy loss spectroscopy (EELS) and X-ray energy dispersive spectroscopy (EDS)|
+| [holospy](https://github.com/hyperspy/holospy)                                 | Electron holography                                                                    |
+| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                        |
+| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                          |
+| [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns       |
+| [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                             |
+| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                               |
+| [rosettasciio](https://github.com/hyperspy/rosettasciio)                       | Reading and writing of scientific data formats.                                        |
 
 ## List of `signal_type` classes provided by the different HyperSpy extensions in alphabetical order
