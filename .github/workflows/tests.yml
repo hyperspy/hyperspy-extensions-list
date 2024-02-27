@@ -179,7 +179,7 @@ jobs:
       - name: Run HyperSpy Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs hyperspy --reruns 3 -n 4 -k "not test_get_unwrapped_phase and not apodization"
+          python -m pytest --pyargs hyperspy --reruns 3
 
       - name: Run RosettaScio Test Suite
         if: ${{ always() }}
