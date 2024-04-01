@@ -65,7 +65,7 @@ jobs:
       # EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
       EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui lumispy pyxem exspy holospy
       # Unpin pytest, when pyxem 0.18 is release
-      TEST_DEPS: pytest==7.4.4 pytest-xdist pytest-rerunfailures pytest-mpl
+      TEST_DEPS: pytest==7.4.4 pytest-xdist pytest-rerunfailures pytest-mpl filelock
     defaults:
       run:
         shell: bash -l {0}
