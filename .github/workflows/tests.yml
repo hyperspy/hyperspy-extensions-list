@@ -101,9 +101,6 @@ jobs:
       - name: Install dependencies development version
         if: ${{ matrix.DEPENDENCIES_DEV }}
         run: |
-          # workaround for https://github.com/sympy/sympy/issues/26268
-          # remove when sympy supports mpmath 1.4
-          pip install mpmath
           pip install --upgrade --pre --extra-index-url \
           https://pypi.anaconda.org/scientific-python-nightly-wheels/simple \
           ${{ matrix.DEPENDENCIES }}
@@ -111,9 +108,6 @@ jobs:
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
         run: |
-          # workaround for https://github.com/sympy/sympy/issues/26268
-          # remove when sympy supports mpmath 1.4
-          pip install mpmath
           pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
 
       - name: Conda list
