@@ -124,7 +124,7 @@ jobs:
         if: contains(matrix.RSIO_VERSION, 'release')
         run: |
           # Use mamba when package is available on conda-forge
-          pip install rosettasciio[all]
+          mamba install rosettasciio
 
       - name: Install RosettaSciIO dev
         if: contains(matrix.RSIO_VERSION, 'dev')
