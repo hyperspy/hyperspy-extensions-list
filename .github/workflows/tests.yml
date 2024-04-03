@@ -101,9 +101,6 @@ jobs:
       - name: Install dependencies development version
         if: ${{ matrix.DEPENDENCIES_DEV }}
         run: |
-          # workaround for https://github.com/sympy/sympy/issues/26268
-          # remove when sympy supports mpmath 1.4
-          pip install mpmath
           pip install --upgrade --pre --extra-index-url \
           https://pypi.anaconda.org/scientific-python-nightly-wheels/simple \
           ${{ matrix.DEPENDENCIES }}
@@ -111,9 +108,6 @@ jobs:
       - name: Install dependencies pre release version
         if: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
         run: |
-          # workaround for https://github.com/sympy/sympy/issues/26268
-          # remove when sympy supports mpmath 1.4
-          pip install mpmath
           pip install --upgrade --pre ${{ matrix.DEPENDENCIES }}
 
       - name: Conda list
@@ -124,7 +118,7 @@ jobs:
         if: contains(matrix.RSIO_VERSION, 'release')
         run: |
           # Use mamba when package is available on conda-forge
-          pip install rosettasciio[all]
+          mamba install rosettasciio
 
       - name: Install RosettaSciIO dev
         if: contains(matrix.RSIO_VERSION, 'dev')
@@ -179,13 +173,12 @@ jobs:
       - name: Run HyperSpy Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs hyperspy --reruns 3
+          python -m pytest --pyargs hyperspy --reruns 3 -n 2
 
       - name: Run RosettaScio Test Suite
         if: ${{ always() }}
         run: |
-          # Not possible to use "-n" because downloading test files will be ignored
-          python -m pytest --pyargs rsciio
+          python -m pytest --pyargs rsciio -n 2
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
