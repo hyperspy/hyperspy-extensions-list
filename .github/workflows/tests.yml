@@ -206,7 +206,7 @@ jobs:
       - name: Run holospy Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs holospy -k "not test_reconstruct_phase"
+          python -m pytest --pyargs holospy
 
       # - name: Run kikuchipy Test Suite
       #   run: |
