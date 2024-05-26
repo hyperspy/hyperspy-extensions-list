@@ -178,7 +178,8 @@ jobs:
       - name: Run RosettaScio Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs rsciio -n 2
+          # Remove test skipping once https://github.com/hyperspy/rosettasciio/pull/262 is released
+          python -m pytest --pyargs rsciio -n 2 -k "not test_hamamatsu_streak_loadwarnings"
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
