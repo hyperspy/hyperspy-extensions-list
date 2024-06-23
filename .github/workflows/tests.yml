@@ -25,6 +25,7 @@ jobs:
         DEPENDENCIES_DEV: [false]
         DEPENDENCIES_PRE_RELEASE: [false]
         DEPENDENCIES_NUMBA_DEV: [false]
+        DEPENDENCIES_NUMPY2: [false]
         USE_MAMBA: [true]
         PYTHON_VERSION: ['3.11']
         include:
@@ -59,6 +60,15 @@ jobs:
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: numba
             USE_MAMBA: true
+            PYTHON_VERSION: '3.11'
+          - DEPENDENCIES_NUMPY2: true
+            # Install numpy 2.0
+            LABEL: -dependencies_numpy20
+            HYPERSPY_VERSION: 'RnMinor'
+            RSIO_VERSION: 'dev'
+            EXTENSION_VERSION: 'dev'
+            DEPENDENCIES: matplotlib scipy scikit-learn sympy h5py scikit-image numpy numba
+            USE_MAMBA: false
             PYTHON_VERSION: '3.11'
 
     env:
@@ -164,6 +174,17 @@ jobs:
           pip install git+https://github.com/pyxem/pyxem.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_ipywidgets.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_traitsui.git
+
+      - name: Install Numpy 2
+        if: ${{ matrix.DEPENDENCIES_NUMPY2 }}
+        run: |
+          # Install dev branches supporting numpy 2
+          pip install git+https://github.com/ericpre/hyperspy@fix_numpy2
+          # See https://github.com/hyperspy/rosettasciio/pull/281
+          pip install git+https://github.com/ericpre/rosettasciio@numpy2.0
+          pip install git+https://github.com/ericpre/python-mrcz.git@numpy2.0_and_deprecation_fixes
+          pip uninstall -y pyUSID
+          pip install numpy==2
 
       - name: Clear conda and pip cache
         run: |
