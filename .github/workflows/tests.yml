@@ -64,8 +64,7 @@ jobs:
     env:
       # EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
       EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui lumispy pyxem exspy holospy
-      # Unpin pytest, when pyxem 0.18 is release
-      TEST_DEPS: pytest==7.4.4 pytest-xdist pytest-rerunfailures pytest-mpl filelock
+      TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl filelock
     defaults:
       run:
         shell: bash -l {0}
@@ -178,8 +177,9 @@ jobs:
       - name: Run RosettaScio Test Suite
         if: ${{ always() }}
         run: |
-          # Remove test skipping once https://github.com/hyperspy/rosettasciio/pull/262 is released
-          python -m pytest --pyargs rsciio -n 2 -k "not test_hamamatsu_streak_loadwarnings"
+          # Remove skipping test when rosettasciio 0.6 is released
+          # https://github.com/hyperspy/rosettasciio/pull/282 
+          python -m pytest --pyargs rsciio -n 2 -k "not test_read_stack"
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
