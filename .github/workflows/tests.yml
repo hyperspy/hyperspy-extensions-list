@@ -137,10 +137,7 @@ jobs:
       - name: Install HyperSpy RnMinor
         if: contains(matrix.HYPERSPY_VERSION, 'RnMinor')
         run: |
-          # Remove when https://github.com/hyperspy/hyperspy/pull/3388 is merged
-          # related to sympy pre-release
-          # pip install "hyperspy[all] @ git+https://github.com/hyperspy/hyperspy.git@RELEASE_next_minor"
-          pip install "hyperspy[all] @ git+https://github.com/ericpre/hyperspy.git@fix_expression"
+          pip install "hyperspy[all] @ git+https://github.com/hyperspy/hyperspy.git@RELEASE_next_minor"
 
       - name: Install HyperSpy RnMajor
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
@@ -155,11 +152,10 @@ jobs:
       - name: Install Extension Dev
         if: contains(matrix.EXTENSION_VERSION, 'dev')
         run: |
-          # pip install git+https://github.com/hyperspy/exspy.git
-          # Removed when https://github.com/hyperspy/exspy/pull/55 is merged
-          pip install git+https://github.com/ericpre/exspy.git@fix_EELSArctan_gradients
+          pip install git+https://github.com/hyperspy/exspy.git
           pip install git+https://github.com/hyperspy/holospy.git
           pip install git+https://github.com/lumispy/lumispy.git
+          # uncomment when kikuchipy supports hyperspy 2
           # pip install git+https://github.com/pyxem/kikuchipy.git
           pip install git+https://github.com/pyxem/pyxem.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_ipywidgets.git
