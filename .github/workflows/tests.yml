@@ -178,9 +178,7 @@ jobs:
       - name: Run RosettaScio Test Suite
         if: ${{ always() }}
         run: |
-          # Remove skipping test when rosettasciio 0.6 is released
-          # https://github.com/hyperspy/rosettasciio/pull/282 
-          python -m pytest --pyargs rsciio -n 2 -k "not test_read_stack"
+          python -m pytest --pyargs rsciio -n 2
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
