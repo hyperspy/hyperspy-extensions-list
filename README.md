@@ -15,13 +15,15 @@ and send us a pull request.
 
 # (Known) HyperSpy extensions
 
-| Package name                                                                   | Brief description                                                                |
-|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                  |
-| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                    |
-| [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns |
-| [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                       |
-| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                         |
+| Package name                                                                   | Brief description                                                                                      |
+|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| [eXSpy](https://github.com/hyperspy/exspy)                                     | X-rays Energy Dispersive Spectroscopy (EDS) and Electron Energy Loss Spectroscopy (EELS) data analysis |
+| [holoSpy](https://github.com/hyperspy/holos                                    | Off-axis electron holography data analysis                                                             |
+| [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                                        |
+| [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                                          |
+| [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns                       |
+| [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                                             |
+| [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                                               |
 
 ## List of `signal_type` classes provided by the different HyperSpy extensions in alphabetical order
 
@@ -94,7 +96,7 @@ and send us a pull request.
             <td>DielectricFunction</td>
             <td>dielectric function</td>
             <td>DielectricFunction</td>
-            <td>hyperspy</td>
+            <td>exspy</td>
         </tr>
         <tr>
             <td>diffraction</td>
@@ -166,19 +168,19 @@ and send us a pull request.
             <td>EDS_SEM</td>
             <td></td>
             <td>EDSSEMSpectrum</td>
-            <td>hyperspy</td>
+            <td>exspy</td>
         </tr>
         <tr>
             <td>EDS_TEM</td>
             <td></td>
             <td>EDSTEMSpectrum</td>
-            <td>hyperspy</td>
+            <td>exspy</td>
         </tr>
         <tr>
             <td>EELS</td>
             <td>TEM EELS</td>
             <td>EELSSpectrum</td>
-            <td>hyperspy</td>
+            <td>exspy</td>
         </tr>
         <tr>
             <td>EL</td>
@@ -202,7 +204,7 @@ and send us a pull request.
             <td>hologram</td>
             <td></td>
             <td>HologramImage</td>
-            <td>hyperspy</td>
+            <td>holospy</td>
         </tr>
         <tr>
             <td>Luminescence</td>
