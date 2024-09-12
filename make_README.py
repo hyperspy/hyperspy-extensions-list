@@ -1,3 +1,5 @@
+import contextlib
+import io
 import os
 
 import hyperspy.api as hs
@@ -6,10 +8,13 @@ import hyperspy.api as hs
 readme_source_folder = 'readme_source'
 
 # Get the information from hyperspy
-table_html = hs.print_known_signal_types()._repr_html_()
+f = io.StringIO()
+with contextlib.redirect_stdout(f):
+    hs.print_known_signal_types()
+table_ascii = f.getvalue()
 
 with open(os.path.join(readme_source_folder, '2-extension_table.md'), "w") as f:
-    f.write(table_html)
+    f.write(table_ascii)
 
 # Make the README.md by concatenation
 source_file_list = sorted(os.listdir(readme_source_folder))
