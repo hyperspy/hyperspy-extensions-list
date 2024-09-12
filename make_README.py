@@ -2,6 +2,7 @@ import contextlib
 import io
 import os
 
+from prettytable import MARKDOWN
 import hyperspy.api as hs
 
 
@@ -10,7 +11,7 @@ readme_source_folder = 'readme_source'
 # Get the information from hyperspy
 f = io.StringIO()
 with contextlib.redirect_stdout(f):
-    hs.print_known_signal_types()
+    hs.print_known_signal_types(style=MARKDOWN)
 table_ascii = f.getvalue()
 
 with open(os.path.join(readme_source_folder, '2-extension_table.md'), "w") as f:
