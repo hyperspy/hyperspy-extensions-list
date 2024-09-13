@@ -1,6 +1,5 @@
 exspy
 holospy
 hyperspy
-kikuchipy
 lumispy
 pyxem
