@@ -3,3 +3,4 @@ holospy
 hyperspy
 lumispy
 pyxem
+etspy
