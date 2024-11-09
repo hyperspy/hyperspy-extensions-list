@@ -62,8 +62,7 @@ jobs:
             PYTHON_VERSION: '3.11'
 
     env:
-      # EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
-      EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui lumispy pyxem exspy holospy
+      EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
       TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl filelock
     defaults:
       run:
@@ -143,7 +142,7 @@ jobs:
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
           pip install "hyperspy[all] @ git+https://github.com/hyperspy/hyperspy.git@RELEASE_next_major"
-  
+
       - name: Install Extension Release
         if: contains(matrix.EXTENSION_VERSION, 'release')
         run: |
@@ -155,8 +154,7 @@ jobs:
           pip install git+https://github.com/hyperspy/exspy.git
           pip install git+https://github.com/hyperspy/holospy.git
           pip install git+https://github.com/lumispy/lumispy.git
-          # uncomment when kikuchipy supports hyperspy 2
-          # pip install git+https://github.com/pyxem/kikuchipy.git
+          pip install git+https://github.com/pyxem/kikuchipy.git
           pip install git+https://github.com/pyxem/pyxem.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_ipywidgets.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_traitsui.git
@@ -184,7 +182,7 @@ jobs:
         if: ${{ always() }}
         run: |
           python -m pytest --pyargs hyperspy_gui_ipywidgets
-  
+
       - name: Run hyperspy_gui_traitsui Test Suite
         if: ${{ always() }}
         # run the tests headlessly
@@ -201,9 +199,9 @@ jobs:
         run: |
           python -m pytest --pyargs holospy
 
-      # - name: Run kikuchipy Test Suite
-      #   run: |
-      #     python -m pytest --pyargs kikuchipy
+      - name: Run kikuchipy Test Suite
+        run: |
+          python -m pytest --pyargs kikuchipy
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
