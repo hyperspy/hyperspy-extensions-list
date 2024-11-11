@@ -27,12 +27,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: conda-incubator/setup-miniconda@master
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          miniforge-variant: Mambaforge
           miniforge-version: latest
           # use base environment, so that when using pip, this is from the
-          # mambaforge distribution
+          # miniforge distribution
           auto-activate-base: true
           activate-environment: ""
 
