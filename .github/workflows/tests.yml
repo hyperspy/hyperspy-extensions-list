@@ -72,13 +72,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: conda-incubator/setup-miniconda@main
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          miniforge-variant: Mambaforge
           miniforge-version: latest
           python-version: ${{ matrix.PYTHON_VERSION }}
           # use base environment, so that when using pip, this is from the
-          # mambaforge distribution
+          # miniforge distribution
           # auto-activate-base: true
           activate-environment: "test"
 
@@ -116,7 +115,6 @@ jobs:
       - name: Install RosettaSciIO release
         if: contains(matrix.RSIO_VERSION, 'release')
         run: |
-          # Use mamba when package is available on conda-forge
           mamba install rosettasciio
 
       - name: Install RosettaSciIO dev
