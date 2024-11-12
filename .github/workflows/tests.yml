@@ -198,6 +198,8 @@ jobs:
           python -m pytest --pyargs holospy
 
       - name: Run kikuchipy Test Suite
+        # tests are not package with kikuchipy, test only for dev version
+        if: contains(matrix.EXTENSION_VERSION, 'dev')
         run: |
           python -m pytest --pyargs kikuchipy
 
