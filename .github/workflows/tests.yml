@@ -84,6 +84,11 @@ jobs:
         run: |
           mamba install pip pyqt ${{ env.TEST_DEPS }}
 
+      - name: Install numpy 1.x
+        run: |
+          # remove when pyxem support numpy 2
+          mamba install numpy=1
+
       - name: Conda info
         run: |
           conda info
