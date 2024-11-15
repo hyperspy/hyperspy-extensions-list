@@ -21,7 +21,7 @@ and send us a pull request.
 | [holospy](https://github.com/hyperspy/holospy)                                 | Electron holography                                                                    |
 | [hyperspy-gui-ipywidgets](https://github.com/hyperspy/hyperspy_gui_ipywidgets) | ipywidgets widgets for HyperSpy                                                        |
 | [hyperspy-gui-traitsui](https://github.com/hyperspy/hyperspy_gui_traitsui)     | traitsui widgets for HyperSpy                                                          |
-| [kikuchipy](https://github.com/kikuchipy/kikuchipy)                            | Processing, simulating and indexing of electron backscatter diffraction patterns       |
+| [kikuchipy](https://github.com/pyxem/kikuchipy)                                | Processing, simulating and indexing of electron backscatter diffraction patterns       |
 | [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                             |
 | [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                               |
 | [rosettasciio](https://github.com/hyperspy/rosettasciio)                       | Reading and writing of scientific data formats.                                        |
