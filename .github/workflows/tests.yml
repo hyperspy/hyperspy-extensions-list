@@ -71,19 +71,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: conda-incubator/setup-miniconda@main
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          miniforge-variant: Mambaforge
           miniforge-version: latest
           python-version: ${{ matrix.PYTHON_VERSION }}
           # use base environment, so that when using pip, this is from the
-          # mambaforge distribution
+          # miniforge distribution
           # auto-activate-base: true
           activate-environment: "test"
 
       - name: Install pip pyqt and Test dependencies
         run: |
           mamba install pip pyqt ${{ env.TEST_DEPS }}
+
+      - name: Install numpy 1.x
+        run: |
+          # remove when pyxem support numpy 2
+          mamba install numpy=1
 
       - name: Conda info
         run: |
@@ -115,7 +119,6 @@ jobs:
       - name: Install RosettaSciIO release
         if: contains(matrix.RSIO_VERSION, 'release')
         run: |
-          # Use mamba when package is available on conda-forge
           mamba install rosettasciio
 
       - name: Install RosettaSciIO dev
