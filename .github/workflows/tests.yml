@@ -203,6 +203,7 @@ jobs:
           python -m pytest --pyargs holospy
 
       - name: Run kikuchipy Test Suite
+        if: ${{ always() }}
         run: |
           python -m pytest --pyargs kikuchipy
 
