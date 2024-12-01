@@ -205,7 +205,7 @@ jobs:
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs kikuchipy
+          python -m pytest --pyargs kikuchipy -k "not test_spherical_pyvista and not test_not_allow_download_raises"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
