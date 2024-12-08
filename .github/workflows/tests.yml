@@ -204,9 +204,11 @@ jobs:
 
       - name: Run kikuchipy Test Suite
         if: ${{ always() }}
-        # run the tests headlessly
+        # Run the tests headlessly.
+        # Unskip test when https://github.com/pyxem/kikuchipy/issues/707 is fixed and
+        # released.
         run: |
-          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_spherical_pyvista and not test_not_allow_download_raises"
+          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_not_allow_download_raises"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
