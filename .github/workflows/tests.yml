@@ -26,7 +26,6 @@ jobs:
         DEPENDENCIES_PRE_RELEASE: [false]
         DEPENDENCIES_NUMBA_DEV: [false]
         USE_MAMBA: [true]
-        PYTHON_VERSION: ['3.11']
         include:
           # test against upstream dev
           - DEPENDENCIES_DEV: true
@@ -41,7 +40,6 @@ jobs:
             # see https://scientific-python.org/specs/spec-0004/
             DEPENDENCIES: matplotlib scipy scikit-image scikit-learn
             USE_MAMBA: false
-            PYTHON_VERSION: '3.11'
           - DEPENDENCIES_PRE_RELEASE: true
             # Install RC version available on pypi
             LABEL: -dependencies_pre_release
@@ -50,7 +48,6 @@ jobs:
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: matplotlib scipy scikit-learn sympy h5py scikit-image numba
             USE_MAMBA: false
-            PYTHON_VERSION: '3.11'
           - DEPENDENCIES_NUMBA_DEV: true
             # Install dev version from numba/label/dev channel using mamba
             LABEL: -dependencies_numba_dev
@@ -59,11 +56,11 @@ jobs:
             EXTENSION_VERSION: 'dev'
             DEPENDENCIES: numba
             USE_MAMBA: true
-            PYTHON_VERSION: '3.11'
 
     env:
       EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
       TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl filelock
+      PYTHON_VERSION: '3.12'
     defaults:
       run:
         shell: bash -l {0}
@@ -74,7 +71,7 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
-          python-version: ${{ matrix.PYTHON_VERSION }}
+          python-version: ${{ env.PYTHON_VERSION }}
           # use base environment, so that when using pip, this is from the
           # miniforge distribution
           # auto-activate-base: true
