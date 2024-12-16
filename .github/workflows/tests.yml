@@ -81,6 +81,12 @@ jobs:
         run: |
           mamba install pip pyqt ${{ env.TEST_DEPS }}
 
+      - name: Install dask 2024.11.2
+        run: |
+          # remove when tests failure with dask >=2024.12.0 are sorted
+          # https://github.com/hyperspy/rosettasciio/issues/345
+          mamba install dask-core=2024.11.2
+
       - name: Conda info
         run: |
           conda info
