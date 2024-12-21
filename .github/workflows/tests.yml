@@ -177,7 +177,8 @@ jobs:
       - name: Run RosettaScio Test Suite
         if: ${{ always() }}
         run: |
-          python -m pytest --pyargs rsciio -n 2
+          # mrcz and pyusid doesn't support numpy 2
+          python -m pytest --pyargs rsciio -n 2 -k "not test_mrcz.py and not test_usid.py"
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
