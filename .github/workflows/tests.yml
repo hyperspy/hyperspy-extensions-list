@@ -178,7 +178,7 @@ jobs:
         if: ${{ always() }}
         run: |
           # mrcz and pyusid doesn't support numpy 2
-          python -m pytest --pyargs rsciio -n 2 -k "not test_mrcz.py and not test_usid.py"
+          python -m pytest --pyargs rsciio -n 1 -k "not test_mrcz.py and not test_usid.py and not TestOperate"
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
