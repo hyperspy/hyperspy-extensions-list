@@ -80,7 +80,8 @@ jobs:
       - name: Install pip, pyqt, orix and Test dependencies
         run: |
           # astra-toolbox from pypi.org only works with gpu
-          mamba install pip pyqt orix astra-toolbox ${{ env.TEST_DEPS }}
+          # ffmpeg is a missing dependencies from etspy, see https://github.com/usnistgov/etspy/issues/25
+          mamba install pip pyqt orix astra-toolbox ffmpeg ${{ env.TEST_DEPS }}
 
       - name: Install dask 2024.11.2
         run: |
