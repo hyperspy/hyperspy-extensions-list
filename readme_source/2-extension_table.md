@@ -38,7 +38,9 @@
 |      polar_diffraction      |                                                                           |      PolarDiffraction2D     |   pyxem   |
 |        polar_vectors        |                                                                           |         PolarVectors        |   pyxem   |
 |            power            |                                                                           |           Power2D           |   pyxem   |
+|           RecStack          |                            Reconstructed stack                            |           RecStack          |   etspy   |
 |      reduced_intensity      |                                                                           |      ReducedIntensity1D     |   pyxem   |
+|          TomoStack          |                  Tomography, Tomography stack, TiltStack                  |          TomoStack          |   etspy   |
 |       vector_matching       |                                                                           |    VectorMatchingResults    |   pyxem   |
 |       VirtualBSEImage       |                     virtual_backscatter_electron_image                    |       VirtualBSEImage       | kikuchipy |
 |      virtual_dark_field     |                                                                           |    VirtualDarkFieldImage    |   pyxem   |
