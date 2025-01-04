@@ -24,6 +24,7 @@ and send us a pull request.
 | [kikuchipy](https://github.com/pyxem/kikuchipy)                                | Processing, simulating and indexing of electron backscatter diffraction patterns       |
 | [LumiSpy](https://github.com/lumispy/lumispy)                                  | Analysis of luminescence spectroscopy data                                             |
 | [pyxem](https://github.com/pyxem/pyxem)                                        | Multi-dimensional diffraction microscopy                                               |
-| [rosettasciio](https://github.com/hyperspy/rosettasciio)                       | Reading and writing of scientific data formats.                                        |
+| [rosettasciio](https://github.com/hyperspy/rosettasciio)                       | Reading and writing of scientific data formats                                         |
+| [etspy](https://github.com/usnistgov/etspy)                                    | Electron tomography processing and reconstruction tools                               |
 
 ## List of `signal_type` classes provided by the different HyperSpy extensions in alphabetical order

@@ -58,7 +58,7 @@ jobs:
             USE_MAMBA: true
 
     env:
-      EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy
+      EXTENSION: hyperspy-gui-ipywidgets hyperspy-gui-traitsui kikuchipy lumispy pyxem exspy holospy etspy
       TEST_DEPS: pytest pytest-xdist pytest-rerunfailures pytest-mpl filelock
       PYTHON_VERSION: '3.12'
     defaults:
@@ -79,7 +79,9 @@ jobs:
 
       - name: Install pip, pyqt, orix and Test dependencies
         run: |
-          mamba install pip pyqt orix ${{ env.TEST_DEPS }}
+          # astra-toolbox from pypi.org only works with gpu
+          # ffmpeg is a missing dependencies from etspy, see https://github.com/usnistgov/etspy/issues/25
+          mamba install pip pyqt orix astra-toolbox ffmpeg ${{ env.TEST_DEPS }}
 
       - name: Install dask 2024.11.2
         run: |
@@ -159,6 +161,7 @@ jobs:
           pip install git+https://github.com/pyxem/pyxem.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_ipywidgets.git
           pip install git+https://github.com/hyperspy/hyperspy_gui_traitsui.git
+          pip install git+https://github.com/usnistgov/etspy.git
 
       - name: Clear conda and pip cache
         run: |
@@ -219,3 +222,9 @@ jobs:
         if: ${{ always() }}
         run: |
           python -m pytest --pyargs pyxem
+
+      - name: Run ETSpy Test Suite
+        if: ${{ always() }}
+        # Test needs to be fixed, see https://github.com/usnistgov/etspy/issues/24
+        run: |
+          python -m pytest --pyargs etspy -n 2 -k "not test_version"
