@@ -72,10 +72,8 @@ jobs:
         with:
           miniforge-version: latest
           python-version: ${{ env.PYTHON_VERSION }}
-          # use base environment, so that when using pip, this is from the
-          # miniforge distribution
-          # auto-activate-base: true
           activate-environment: "test"
+          conda-remove-defaults: "true"
 
       - name: Install pip, pyqt and Test dependencies
         run: |
