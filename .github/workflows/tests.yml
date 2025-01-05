@@ -204,13 +204,13 @@ jobs:
         run: |
           python -m pytest --pyargs holospy
 
-      # - name: Run kikuchipy Test Suite
-      #   if: ${{ always() }}
-      #   # Run the tests headlessly (pyvista)
-      #   # Unskip test when https://github.com/pyxem/kikuchipy/issues/707 is fixed and
-      #   # released.
-      #   run: |
-      #     xvfb-run python -m pytest --pyargs kikuchipy -k "not test_not_allow_download_raises"
+      - name: Run kikuchipy Test Suite
+        if: ${{ always() }}
+        # Run the tests headlessly (pyvista)
+        # Unskip test when https://github.com/pyxem/kikuchipy/issues/707 is fixed and
+        # released.
+        run: |
+          xvfb-run python -m pytest --pyargs kikuchipy -k "not test_not_allow_download_raises"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
