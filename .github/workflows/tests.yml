@@ -90,6 +90,13 @@ jobs:
       - name: Conda info
         run: |
           conda info
+
+      - name: Mamba info
+        run: |
+          mamba info
+
+      - name: Conda list
+        run: |
           conda list
 
       - name: Install numba development version
@@ -143,6 +150,14 @@ jobs:
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
           pip install "hyperspy[all] @ git+https://github.com/hyperspy/hyperspy.git@RELEASE_next_major"
+
+      - name: Install kikuchipy Release (without pyvista)
+        if: contains(matrix.EXTENSION_VERSION, 'release')
+        # workaround for installing kikuchipy without pyvista
+        run: |
+          mamba install kikuchipy --only-deps
+          mamba remove pyvista
+          mamba install kikuchipy --no-deps
 
       - name: Install Extension Release
         if: contains(matrix.EXTENSION_VERSION, 'release')
@@ -207,7 +222,7 @@ jobs:
         # Unskip test when https://github.com/pyxem/kikuchipy/issues/707 is fixed and
         # released.
         run: |
-          python -m pytest --pyargs kikuchipy -k "not test_spherical_pyvista and not test_not_allow_download_raises"
+          python -m pytest --pyargs kikuchipy -k "not test_not_allow_download_raises"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
