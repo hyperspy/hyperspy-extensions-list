@@ -63,7 +63,7 @@ jobs:
       PYTHON_VERSION: '3.12'
     defaults:
       run:
-        shell: bash -l {0}
+        shell: bash -el {0}
 
     steps:
       - uses: actions/checkout@v4
@@ -181,7 +181,9 @@ jobs:
         if: ${{ always() }}
         run: |
           # mrcz and pyusid doesn't support numpy 2
-          python -m pytest --pyargs rsciio -n 1 -k "not test_mrcz.py and not test_usid.py and not TestOperate"
+          # TestOperate will need a lumispy release
+          # test_export_scalebar fails with matplotlib dev, fixed in https://github.com/hyperspy/rosettasciio/pull/359
+          python -m pytest --pyargs rsciio -n 1 -k "not test_mrcz.py and not test_usid.py and not TestOperate and not test_export_scalebar"
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
