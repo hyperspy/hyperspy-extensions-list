@@ -175,9 +175,10 @@ jobs:
         if: ${{ always() }}
         run: |
           # mrcz and pyusid doesn't support numpy 2
-          # TestOperate will need a lumispy release
           # test_export_scalebar fails with matplotlib dev, fixed in https://github.com/hyperspy/rosettasciio/pull/359
-          python -m pytest --pyargs rsciio -n 1 -k "not test_mrcz.py and not test_usid.py and not TestOperate and not test_export_scalebar"
+          # test_load_readonly: https://github.com/hyperspy/rosettasciio/issues/345
+          # TestOperate will need a lumispy release
+          python -m pytest --pyargs rsciio -n 1 -k "not test_mrcz.py and not test_usid.py and not TestOperate and not test_export_scalebar and not test_load_readonly and not test_lazy_loading_hyperspy_close"
 
       - name: Run hyperspy_gui_ipywidgets Test Suite
         if: ${{ always() }}
