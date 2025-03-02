@@ -83,12 +83,6 @@ jobs:
           # ffmpeg is a missing dependencies from etspy, see https://github.com/usnistgov/etspy/issues/25
           mamba install pip pyqt orix astra-toolbox ffmpeg ${{ env.TEST_DEPS }}
 
-      - name: Install dask 2024.11.2
-        run: |
-          # remove when tests failure with dask >=2024.12.0 are sorted
-          # https://github.com/hyperspy/rosettasciio/issues/345
-          mamba install dask-core=2024.8.0
-
       - name: Conda info
         run: |
           conda info
