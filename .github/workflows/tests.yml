@@ -72,20 +72,25 @@ jobs:
         with:
           miniforge-version: latest
           python-version: ${{ env.PYTHON_VERSION }}
-          # use base environment, so that when using pip, this is from the
-          # miniforge distribution
-          # auto-activate-base: true
           activate-environment: "test"
+          conda-remove-defaults: "true"
 
-      - name: Install pip, pyqt, orix and Test dependencies
+      - name: Install pip, pyqt and Test dependencies
         run: |
           # astra-toolbox from pypi.org only works with gpu
           # ffmpeg is a missing dependencies from etspy, see https://github.com/usnistgov/etspy/issues/25
-          mamba install pip pyqt orix astra-toolbox ffmpeg ${{ env.TEST_DEPS }}
+          mamba install pip pyqt astra-toolbox ffmpeg ${{ env.TEST_DEPS }}
 
       - name: Conda info
         run: |
           conda info
+
+      - name: Mamba info
+        run: |
+          mamba info
+
+      - name: Conda list
+        run: |
           conda list
 
       - name: Install numba development version
@@ -139,6 +144,14 @@ jobs:
         if: contains(matrix.HYPERSPY_VERSION, 'RnMajor')
         run: |
           pip install "hyperspy[all] @ git+https://github.com/hyperspy/hyperspy.git@RELEASE_next_major"
+
+      - name: Install kikuchipy Release (without pyvista)
+        if: contains(matrix.EXTENSION_VERSION, 'release')
+        # workaround for installing kikuchipy without pyvista
+        run: |
+          mamba install kikuchipy --only-deps
+          mamba remove pyvista
+          mamba install kikuchipy --no-deps
 
       - name: Install Extension Release
         if: contains(matrix.EXTENSION_VERSION, 'release')
@@ -201,13 +214,12 @@ jobs:
         run: |
           python -m pytest --pyargs holospy
 
-      # - name: Run kikuchipy Test Suite
-      #   if: ${{ always() }}
-      #   # Run the tests headlessly (pyvista)
-      #   # Unskip test when https://github.com/pyxem/kikuchipy/issues/707 is fixed and
-      #   # released.
-      #   run: |
-      #     xvfb-run python -m pytest --pyargs kikuchipy -k "not test_not_allow_download_raises"
+      - name: Run kikuchipy Test Suite
+        if: ${{ always() }}
+        # Unskip test when https://github.com/pyxem/kikuchipy/issues/707 is fixed and
+        # released.
+        run: |
+          python -m pytest --pyargs kikuchipy -k "not test_not_allow_download_raises"
 
       - name: Run LumiSpy Test Suite
         if: ${{ always() }}
