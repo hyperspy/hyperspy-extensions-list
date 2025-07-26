@@ -24,6 +24,7 @@ jobs:
         DEPENDENCIES_DEV: ['']
         DEPENDENCIES_PRE_RELEASE: ['']
         USE_CONDA: [false]
+        ADDITIONAL_PACKAGES: ['numpy-quaternion']
         include:
           - DEPENDENCIES_DEV: 'matplotlib scipy scikit-image scikit-learn'
             LABEL: -dependencies_dev
@@ -44,6 +45,7 @@ jobs:
             ROSETTASCIIO_VERSION: 'release'
             EXTENSION_VERSION: 'release'
             USE_CONDA: true
+            ADDITIONAL_PACKAGES: ''
 
     # Use the "reusable workflow" from the hyperspy organisation
     uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
@@ -58,3 +60,8 @@ jobs:
       DEPENDENCIES_DEV: ${{ matrix.DEPENDENCIES_DEV }}
       DEPENDENCIES_PRE_RELEASE: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
       USE_CONDA: ${{ matrix.USE_CONDA }}
+      # Use `numpy-quaternion` orix optional dependency as a workaround to fix
+      # segmentation fault issue in orix, which occurs when numpy-quaternion is
+      # not installed - reason unknown.
+      ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
+      PIP_EXTRAS: '[all,tests]'
