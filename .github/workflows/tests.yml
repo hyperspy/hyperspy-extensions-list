@@ -13,7 +13,7 @@ on:
 
 jobs:
   integration_test:
-    name: rs_${{ matrix.ROSETTASCIIO_VERSION }}-hs_${{ matrix.HYPERSPY_VERSION }}-ext_${{ matrix.EXTENSION_VERSION }}${{ matrix.LABEL }}
+    name: rs_${{ matrix.ROSETTASCIIO_VERSION }} hs_${{ matrix.HYPERSPY_VERSION }} ext_${{ matrix.EXTENSION_VERSION }}
     strategy:
       fail-fast: false
       matrix:
@@ -25,19 +25,20 @@ jobs:
         DEPENDENCIES_PRE_RELEASE: ['']
         USE_CONDA: [false]
         ADDITIONAL_PACKAGES: ['numpy-quaternion']
+        LABEL: ['']
         include:
           - DEPENDENCIES_DEV: 'matplotlib scipy scikit-image scikit-learn'
-            LABEL: -dependencies_dev
+            LABEL: 'Dependencies dev'
             HYPERSPY_VERSION: 'RnM'
             ROSETTASCIIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
           - DEPENDENCIES_PRE_RELEASE: 'matplotlib scipy scikit-learn sympy h5py scikit-image numba'
-            LABEL: -dependencies_pre_release
+            LABEL: 'Dependencies pre_release'
             HYPERSPY_VERSION: 'RnM'
             ROSETTASCIIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
           - NUMBA_DEV: true
-            LABEL: -dependencies_numba_dev
+            LABEL: 'Numba dev'
             HYPERSPY_VERSION: 'RnM'
             ROSETTASCIIO_VERSION: 'dev'
             EXTENSION_VERSION: 'dev'
@@ -46,6 +47,7 @@ jobs:
             EXTENSION_VERSION: 'release'
             USE_CONDA: true
             ADDITIONAL_PACKAGES: ''
+            LABEL: 'Conda'
 
     # Use the "reusable workflow" from the hyperspy organisation
     uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
@@ -65,3 +67,4 @@ jobs:
       # not installed - reason unknown.
       ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
       PIP_EXTRAS: '[all,tests]'
+      LABEL: ${{ matrix.LABEL }}
