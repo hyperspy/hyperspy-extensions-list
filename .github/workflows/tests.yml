@@ -25,7 +25,6 @@ jobs:
         DEPENDENCIES_PRE_RELEASE: ['']
         NUMBA_DEV: [false]
         USE_CONDA: [false]
-        ADDITIONAL_PACKAGES: [numpy-quaternion]
         include:
           - LABEL: Conda
             ROSETTASCIIO_VERSION: release
@@ -35,7 +34,6 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: ''
             NUMBA_DEV: false
             USE_CONDA: true
-            ADDITIONAL_PACKAGES: ''
           - LABEL: Dependencies dev
             ROSETTASCIIO_VERSION: dev
             HYPERSPY_VERSION: RnM
@@ -45,7 +43,6 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: ''
             NUMBA_DEV: false
             USE_CONDA: false
-            ADDITIONAL_PACKAGES: numpy-quaternion
           - LABEL: Dependencies pre_release
             ROSETTASCIIO_VERSION: dev
             HYPERSPY_VERSION: RnM
@@ -54,7 +51,6 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: matplotlib scipy scikit-learn sympy h5py scikit-image numba
             NUMBA_DEV: false
             USE_CONDA: false
-            ADDITIONAL_PACKAGES: numpy-quaternion
           - LABEL: Numba dev
             ROSETTASCIIO_VERSION: dev
             HYPERSPY_VERSION: RnM
@@ -63,7 +59,6 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: ''
             NUMBA_DEV: true
             USE_CONDA: false
-            ADDITIONAL_PACKAGES: numpy-quaternion
 
     # Use the "reusable workflow" from the hyperspy organisation
     uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
@@ -80,8 +75,4 @@ jobs:
       DEPENDENCIES_PRE_RELEASE: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
       NUMBA_DEV: ${{ matrix.NUMBA_DEV }}
       USE_CONDA: ${{ matrix.USE_CONDA }}
-      # # Use `numpy-quaternion` orix optional dependency as a workaround to fix
-      # # segmentation fault issue in orix, which occurs when numpy-quaternion is
-      # # not installed - reason unknown.
-      ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
       LABEL: ${{ matrix.LABEL }}
