@@ -69,8 +69,8 @@ jobs:
     uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
     with:
       # don't run etspy until test suite is fixed
-      # EXTENSIONS: 'exspy holospy lumispy pyxem atomap etspy'
-      EXTENSIONS: 'exspy holospy lumispy pyxem kikuchipy atomap'
+      # EXTENSIONS: 'hyperspy-gui-ipywidgets hyperspy-gui-traitsui exspy holospy lumispy pyxem atomap etspy'
+      EXTENSIONS: 'hyperspy-gui-ipywidgets hyperspy-gui-traitsui exspy holospy lumispy pyxem kikuchipy atomap'
       PIP_EXTRAS: '[all,tests]'
       INSTALL_SOURCE_FROM_REPOSITORY: false
       ROSETTASCIIO_VERSION: ${{ matrix.ROSETTASCIIO_VERSION }}
