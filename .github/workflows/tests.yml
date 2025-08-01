@@ -40,7 +40,8 @@ jobs:
             ROSETTASCIIO_VERSION: dev
             HYPERSPY_VERSION: RnM
             EXTENSION_VERSION: dev
-            DEPENDENCIES_DEV: matplotlib scipy scikit-image scikit-learn
+            # testing against numba dev is done in a separate job
+            DEPENDENCIES_DEV: matplotlib scipy scikit-learn sympy h5py scikit-image
             DEPENDENCIES_PRE_RELEASE: ''
             NUMBA_DEV: false
             USE_CONDA: false
