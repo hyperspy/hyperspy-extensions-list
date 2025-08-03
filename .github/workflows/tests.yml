@@ -25,7 +25,7 @@ jobs:
         DEPENDENCIES_PRE_RELEASE: ['']
         NUMBA_DEV: [false]
         USE_CONDA: [false]
-        ADDITIONAL_PACKAGES: ['']
+        ADDITIONAL_PACKAGES: ['numpy-quaternion']
         PLATFORM: [ubuntu-latest]
         include:
           - LABEL: Conda OpenBLAS
@@ -77,7 +77,7 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: ''
             NUMBA_DEV: false
             USE_CONDA: false
-            ADDITIONAL_PACKAGES: ''
+            ADDITIONAL_PACKAGES: 'numpy-quaternion'
             PLATFORM: ubuntu-latest
           - LABEL: Dependencies pre_release
             ROSETTASCIIO_VERSION: dev
@@ -87,7 +87,7 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: matplotlib scipy scikit-learn sympy h5py scikit-image numba
             NUMBA_DEV: false
             USE_CONDA: false
-            ADDITIONAL_PACKAGES: ''
+            ADDITIONAL_PACKAGES: 'numpy-quaternion'
             PLATFORM: ubuntu-latest
           - LABEL: Numba dev
             ROSETTASCIIO_VERSION: dev
@@ -97,7 +97,7 @@ jobs:
             DEPENDENCIES_PRE_RELEASE: ''
             NUMBA_DEV: true
             USE_CONDA: false
-            ADDITIONAL_PACKAGES: ''
+            ADDITIONAL_PACKAGES: 'numpy-quaternion'
             PLATFORM: ubuntu-latest
 
     # Use the "reusable workflow" from the hyperspy organisation
