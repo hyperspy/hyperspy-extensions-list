@@ -87,7 +87,7 @@ jobs:
             NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*mkl'
-            PLATFORM: macos-13
+            PLATFORM: macos-15-intel
           - LABEL: Conda Accelerate
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
