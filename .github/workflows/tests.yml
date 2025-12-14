@@ -14,6 +14,8 @@ on:
 jobs:
   integration_test:
     name: rs_${{ matrix.ROSETTASCIIO_VERSION }} hs_${{ matrix.HYPERSPY_VERSION }} ext_${{ matrix.EXTENSION_VERSION }}
+    permissions:
+      issues: write
     strategy:
       fail-fast: false
       matrix:
@@ -158,3 +160,4 @@ jobs:
       LABEL: ${{ matrix.LABEL }}
       ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
       PLATFORM: ${{ matrix.PLATFORM }}
+      REPORT_FAILURE_AS_ISSUE: true
