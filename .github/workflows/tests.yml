@@ -162,4 +162,4 @@ jobs:
       ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
       PLATFORM: ${{ matrix.PLATFORM }}
       CACHE_POOCH: 'pooch'
-      CACHE_POOCH_LABEL: ${{ matrix.EXTENSION_VERSION }}
+      CACHE_POOCH_LABEL: 'pooch-${{ matrix.EXTENSION_VERSION }}'
