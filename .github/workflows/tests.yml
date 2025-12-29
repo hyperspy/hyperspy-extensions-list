@@ -144,7 +144,7 @@ jobs:
         #     PLATFORM: ubuntu-latest
 
     # Use the "reusable workflow" from the hyperspy organisation
-    uses: hyperspy/.github/.github/workflows/integration_tests.yml@exspy_testing
+    uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
     with:
       # don't run etspy until test suite is fixed
       # EXTENSIONS: 'hyperspy-gui-ipywidgets hyperspy-gui-traitsui exspy holospy lumispy pyxem atomap etspy'
