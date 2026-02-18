@@ -28,7 +28,9 @@ jobs:
 
   integration_test:
     name: rs_${{ matrix.ROSETTASCIIO_VERSION }} hs_${{ matrix.HYPERSPY_VERSION }} ext_${{ matrix.EXTENSION_VERSION }}
-    needs: [download_exspy_GOS, download_rsciio_test_data]  
+    needs: [download_exspy_GOS, download_rsciio_test_data]
+    permissions:
+      issues: write
     strategy:
       fail-fast: false
       matrix:
@@ -174,3 +176,4 @@ jobs:
       ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
       PLATFORM: ${{ matrix.PLATFORM }}
       RSCIIO_CACHE_POOCH_LABEL: ${{ needs.download_rsciio_test_data.outputs.VERSION }}
+      REPORT_FAILURE_AS_ISSUE: true
