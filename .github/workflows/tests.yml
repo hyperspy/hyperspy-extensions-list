@@ -38,9 +38,6 @@ jobs:
         ROSETTASCIIO_VERSION: [release, dev]
         HYPERSPY_VERSION: [release, RnM, RnP]
         EXTENSION_VERSION: [release, dev]
-        DEPENDENCIES_DEV: ['']
-        DEPENDENCIES_PRE_RELEASE: ['']
-        NUMBA_DEV: [false]
         USE_CONDA: [false]
         ADDITIONAL_PACKAGES: ['numpy-quaternion']
         PLATFORM: [ubuntu-latest]
@@ -49,9 +46,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*openblas'
             PLATFORM: ubuntu-latest
@@ -59,9 +53,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*openblas'
             PLATFORM: windows-latest
@@ -69,9 +60,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*openblas'
             PLATFORM: macos-latest
@@ -79,9 +67,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*mkl'
             PLATFORM: ubuntu-latest
@@ -89,9 +74,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*mkl'
             PLATFORM: windows-latest
@@ -99,9 +81,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*mkl'
             PLATFORM: macos-15-intel
@@ -109,9 +88,6 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*_accelerate'
             PLATFORM: macos-latest
@@ -119,43 +95,9 @@ jobs:
             ROSETTASCIIO_VERSION: release
             HYPERSPY_VERSION: release
             EXTENSION_VERSION: release
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
             USE_CONDA: true
             ADDITIONAL_PACKAGES: 'libblas=*=*newaccelerate'
             PLATFORM: macos-latest
-          - LABEL: Dependencies dev
-            ROSETTASCIIO_VERSION: dev
-            HYPERSPY_VERSION: RnM
-            EXTENSION_VERSION: dev
-            # testing against numba dev is done in a separate job
-            DEPENDENCIES_DEV: matplotlib scipy scikit-learn sympy h5py scikit-image
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: false
-            USE_CONDA: false
-            ADDITIONAL_PACKAGES: 'numpy-quaternion'
-            PLATFORM: ubuntu-latest
-          - LABEL: Dependencies pre_release
-            ROSETTASCIIO_VERSION: dev
-            HYPERSPY_VERSION: RnM
-            EXTENSION_VERSION: dev
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: matplotlib scipy scikit-learn sympy h5py scikit-image numba
-            NUMBA_DEV: false
-            USE_CONDA: false
-            ADDITIONAL_PACKAGES: 'numpy-quaternion'
-            PLATFORM: ubuntu-latest
-          - LABEL: Numba dev
-            ROSETTASCIIO_VERSION: dev
-            HYPERSPY_VERSION: RnM
-            EXTENSION_VERSION: dev
-            DEPENDENCIES_DEV: ''
-            DEPENDENCIES_PRE_RELEASE: ''
-            NUMBA_DEV: true
-            USE_CONDA: false
-            ADDITIONAL_PACKAGES: 'numpy-quaternion'
-            PLATFORM: ubuntu-latest
 
     # Use the "reusable workflow" from the hyperspy organisation
     uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
@@ -168,9 +110,6 @@ jobs:
       ROSETTASCIIO_VERSION: ${{ matrix.ROSETTASCIIO_VERSION }}
       HYPERSPY_VERSION: ${{ matrix.HYPERSPY_VERSION }}
       EXTENSION_VERSION: ${{ matrix.EXTENSION_VERSION }}
-      DEPENDENCIES_DEV: ${{ matrix.DEPENDENCIES_DEV }}
-      DEPENDENCIES_PRE_RELEASE: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
-      NUMBA_DEV: ${{ matrix.NUMBA_DEV }}
       USE_CONDA: ${{ matrix.USE_CONDA }}
       LABEL: ${{ matrix.LABEL }}
       ADDITIONAL_PACKAGES: ${{ matrix.ADDITIONAL_PACKAGES }}
