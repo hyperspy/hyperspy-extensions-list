@@ -1,0 +1,74 @@
+name: Integration tests (Dependencies dev)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '10 0 * * *'
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  download_exspy_GOS:
+    # Use the "reusable workflow" from the hyperspy organisation
+    uses: hyperspy/.github/.github/workflows/download_exspy_GOS.yml@main
+
+  download_rsciio_test_data:
+    # Use the "reusable workflow" from the hyperspy organisation
+    uses: hyperspy/.github/.github/workflows/download_rsciio_test_data.yml@main
+    strategy:
+      fail-fast: false
+      matrix:
+        VERSION: [main]
+    with:
+      VERSION: ${{ matrix.VERSION }}
+
+  integration_test:
+    name: rs_dev hs_dev ext_dev
+    needs: [download_exspy_GOS, download_rsciio_test_data]
+    permissions:
+      issues: write
+    strategy:
+      fail-fast: false
+      matrix:
+        LABEL: ['']
+        DEPENDENCIES_DEV: ['']
+        DEPENDENCIES_PRE_RELEASE: ['']
+        NUMBA_DEV: [false]
+        include:
+          - LABEL: Dependencies dev
+            # testing against numba dev is done in a separate job
+            DEPENDENCIES_DEV: matplotlib scipy scikit-learn sympy h5py scikit-image
+            DEPENDENCIES_PRE_RELEASE: ''
+            NUMBA_DEV: false
+          - LABEL: Dependencies pre_release
+            DEPENDENCIES_DEV: ''
+            DEPENDENCIES_PRE_RELEASE: matplotlib scipy scikit-learn sympy h5py scikit-image numba
+            NUMBA_DEV: false
+          - LABEL: Numba dev
+            DEPENDENCIES_DEV: ''
+            DEPENDENCIES_PRE_RELEASE: ''
+            NUMBA_DEV: true
+
+    # Use the "reusable workflow" from the hyperspy organisation
+    uses: hyperspy/.github/.github/workflows/integration_tests.yml@main
+    with:
+      # don't run etspy until test suite is fixed
+      # EXTENSIONS: 'hyperspy-gui-ipywidgets hyperspy-gui-traitsui exspy holospy lumispy pyxem atomap etspy'
+      EXTENSIONS: 'hyperspy-gui-ipywidgets hyperspy-gui-traitsui exspy holospy lumispy pyxem kikuchipy atomap'
+      PIP_EXTRAS: '[all,tests]'
+      INSTALL_SOURCE_FROM_REPOSITORY: false
+      ROSETTASCIIO_VERSION: dev
+      HYPERSPY_VERSION: RnM
+      EXTENSION_VERSION: dev
+      DEPENDENCIES_DEV: ${{ matrix.DEPENDENCIES_DEV }}
+      DEPENDENCIES_PRE_RELEASE: ${{ matrix.DEPENDENCIES_PRE_RELEASE }}
+      NUMBA_DEV: ${{ matrix.NUMBA_DEV }}
+      LABEL: ${{ matrix.LABEL }}
+      ADDITIONAL_PACKAGES: numpy-quaternion
+      PLATFORM: ubuntu-latest
+      RSCIIO_CACHE_POOCH_LABEL: ${{ needs.download_rsciio_test_data.outputs.VERSION }}
+      REPORT_FAILURE_AS_ISSUE: true
